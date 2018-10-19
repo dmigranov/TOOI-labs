@@ -14,7 +14,6 @@ for act in data["acts"]:
     for scene in act["scenes"]:
         action = scene["action"]
         for charwords in action:
-            #print(words["character"])
             characters.add(charwords["character"])
             words = charwords["says"]
             l = 0
@@ -27,7 +26,12 @@ for act in data["acts"]:
             
 print(maxcharacter + ": " + str(mx))
 print(sorted(characters))
+print(len(characters))
         
 
+#create a new file
+json_file = open('my.json', 'w')
+json_file.write(json.dumps({"fruits" : [{"name" : "apple","type" : "citrus"},{"name" : "orange","type" : "dunno"}]}, sort_keys=True, indent=4))
 
-
+#print(json.dumps({"fruits" : [{"name" : "apple","type" : "citrus"},{"name" : "orange","type" : "dunno"}]}, sort_keys=True, indent=4))
+json_file.close()

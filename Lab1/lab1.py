@@ -62,6 +62,9 @@ sentenceroot = root[1][1][0][0][1]
 for token in sentenceroot:
     print(token.get('text'), end = ' ')
 
+
+sentences.close()
+pluralnouns.close()
           
 #insert
 
