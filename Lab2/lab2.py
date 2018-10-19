@@ -1,22 +1,33 @@
 import json
 
 
-#with open('RomeoAndJuliet.json') as f:
-    #data = json.load(f)
-
 with open('RomeoAndJuliet.json', encoding='utf-8') as data_file:
     data = json.loads(data_file.read())
 
-
-#characters = set(item['character'] for item in data.values())
 characters = set()
+mx = 0
+maxcharacter= ""
+
+
 
 for act in data["acts"]:
     for scene in act["scenes"]:
         action = scene["action"]
-        for words in action:
+        for charwords in action:
             #print(words["character"])
-            characters.add(words["character"])
+            characters.add(charwords["character"])
+            words = charwords["says"]
+            l = 0
+            for w in words:
+                l = l + len(w)
+            if l > mx:
+                mx = l
+                maxcharacter = charwords["character"]
 
+            
+print(maxcharacter + ": " + str(mx))
 print(sorted(characters))
         
+
+
+
