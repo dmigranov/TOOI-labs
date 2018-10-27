@@ -1,7 +1,10 @@
 import numpy as np
 #axis 0 - rows, axis 1 - cols
+tasknum = 0
 #1
 z = np.zeros(10)
+#tasknum+=1
+#print(tasknum)
 print(z)
 #2
 z[9] = 1
@@ -51,7 +54,12 @@ r = np.random.random((3,3))
 print(np.reshape(r, 9))
 #19
 r = np.random.random((4,4))
-
+print(r)
+mx = np.amax(r, axis =  1)
+mx = np.reshape(mx, (4,1))
+#print(mx)
+r-=mx
+print(r)
 #20
 with open('matrix.txt', 'r') as source:
     print(np.fromfile(source, sep=','))
