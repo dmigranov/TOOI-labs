@@ -11,11 +11,6 @@ bicnt = collections.Counter()
 order = collections.OrderedDict()
 
 
-#for source in root.iter('source'):
-#    l = source.text.split()
-#    for word in l:
-#        cnt[word] += 1 #word.lower()
-
 prev = ""
 for token in root.iter('token'):
     flag = True
@@ -52,3 +47,47 @@ print("Longest", list(lenorder.items())[0])
 print("Bigrams", bicnt.most_common(20))
 print("Unique", unique)
 print("Size", len(lenorder))
+
+
+
+
+#1.2
+import json
+
+with open('RomeoAndJuliet.json', encoding='utf-8') as data_file:
+    data = json.loads(data_file.read())
+
+cnt = collections.Counter()
+bicnt = collections.Counter()
+order = collections.OrderedDict()
+
+prev = ""
+for act in data["acts"]:
+    for scene in act["scenes"]:
+        action = scene["action"]
+        for charwords in action:
+            words = charwords["says"]
+            for reply in words:
+                l = reply.split()
+                for word in l:
+                    cnt[word] += 1
+                    if prev != "":
+                        bigram = (prev, word)
+                        bicnt[bigram]+=1
+                    prev = word
+
+lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
+unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
+unique =0
+for k,v in unorder.items():
+    if v == 1:
+        unique+=1
+        
+print("#2")
+print("Most common", cnt.most_common(20))
+print("Least common", cnt.most_common()[-19:])
+print("Longest", list(lenorder.items())[0])
+print("Bigrams", bicnt.most_common(20))
+print("Unique", unique)
+print("Size", len(lenorder))
+
