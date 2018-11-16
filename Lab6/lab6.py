@@ -8,7 +8,7 @@ tree = etree.parse('file.xml')
 root = tree.getroot()
 cnt = collections.Counter()
 bicnt = collections.Counter()
-order = collections.OrderedDict()
+
 
 
 prev = ""
@@ -35,8 +35,8 @@ for token in root.iter('token'):
 
 lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
 unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
-unique =0
-for k,v in unorder.items():
+unique = 0
+for k,v in cnt.items():
     if v == 1:
         unique+=1
 
@@ -59,7 +59,7 @@ with open('RomeoAndJuliet.json', encoding='utf-8') as data_file:
 
 cnt = collections.Counter()
 bicnt = collections.Counter()
-order = collections.OrderedDict()
+
 
 prev = ""
 for act in data["acts"]:
@@ -78,8 +78,8 @@ for act in data["acts"]:
 
 lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
 unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
-unique =0
-for k,v in unorder.items():
+unique = 0
+for k,v in cnt.items():
     if v == 1:
         unique+=1
         
@@ -97,12 +97,13 @@ print("Size", len(lenorder))
 import csv
 cnt = collections.Counter()
 bicnt = collections.Counter()
-order = collections.OrderedDict()
+
+prices = dict()
 
 prev = ""
 with open('stage3_test.csv', 'r', encoding = 'utf-8') as source, open('sorted.csv', 'w', encoding = 'utf-8') as dest:
     reader = csv.DictReader(source)
-    #writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[0], reader.fieldnames[2], reader.fieldnames[4]])
+    writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[2], reader.fieldnames[4]])
     
     for row in reader:
         words = row["Title"].split() + row["Description"].split()
@@ -112,14 +113,17 @@ with open('stage3_test.csv', 'r', encoding = 'utf-8') as source, open('sorted.cs
                 bigram = (prev, word)
                 bicnt[bigram]+=1
             prev = word
+        titleprice = {row["Title"] : row["Price"] }
+        prices.update(titleprice)
         
     
     
     
 lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
 unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
-unique =0
-for k,v in unorder.items():
+sortedPrices = collections.OrderedDict(sorted(prices.items(), key=lambda t: t[1]))
+unique = 0
+for k,v in cnt.items():
     if v == 1:
         unique+=1
         
@@ -132,8 +136,6 @@ print("Unique", unique)
 print("Size", len(lenorder))
 
 
-
-
-
-
+#print("#4")
+print("Prices", list(sortedPrices.items())[0:10])
 
