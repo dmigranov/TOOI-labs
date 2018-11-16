@@ -101,9 +101,10 @@ bicnt = collections.Counter()
 prices = dict()
 
 prev = ""
-with open('stage3_test.csv', 'r', encoding = 'utf-8') as source, open('sorted.csv', 'w', encoding = 'utf-8') as dest:
+with open('stage3_test.csv', 'r', encoding = 'utf-8') as source:#, open('sorted.csv', 'w', encoding = 'utf-8') as dest:
     reader = csv.DictReader(source)
-    writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[2], reader.fieldnames[4]])
+    #writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[2], reader.fieldnames[4]])
+
     
     for row in reader:
         words = row["Title"].split() + row["Description"].split()
@@ -121,7 +122,7 @@ with open('stage3_test.csv', 'r', encoding = 'utf-8') as source, open('sorted.cs
     
 lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
 unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
-sortedPrices = collections.OrderedDict(sorted(prices.items(), key=lambda t: t[1]))
+sortedPrices = collections.OrderedDict(sorted(prices.items(), key=lambda t: float(t[1])))
 unique = 0
 for k,v in cnt.items():
     if v == 1:
@@ -137,5 +138,12 @@ print("Size", len(lenorder))
 
 
 #print("#4")
-print("Prices", list(sortedPrices.items())[0:10])
+with open('sorted.csv', 'w', encoding = 'utf-8') as dest:
+    writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[2], reader.fieldnames[4]])
+    writer.writeheader()
+    
+    for k,v in sortedPrices.items():
+        newrow = {'Title' : k, 'Price' : v}
+        writer.writerow(newrow)
+    
 
