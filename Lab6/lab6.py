@@ -20,6 +20,7 @@ prev = ""
 for token in root.iter('token'):
     flag = True
     biflag = True
+    
     word = token.get("text")
     for g in token.iter('g'):
         if g.get('v') == "CONJ" or g.get('v') == "PREP" or g.get('v') == "PNCT" or g.get('v') == "UNKN":
@@ -29,11 +30,12 @@ for token in root.iter('token'):
         
     if flag:
         cnt[token.get("text")] += 1
-    if prev != "" and biflag:
+    if prev != "" and biflag and prevbiflag:
         bigram = (prev, word)
         bicnt[bigram]+=1
             
     prev = word
+    prevbiflag = biflag
             
 
 lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
