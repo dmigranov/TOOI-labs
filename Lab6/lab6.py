@@ -91,3 +91,49 @@ print("Bigrams", bicnt.most_common(20))
 print("Unique", unique)
 print("Size", len(lenorder))
 
+
+
+#1.3
+import csv
+cnt = collections.Counter()
+bicnt = collections.Counter()
+order = collections.OrderedDict()
+
+prev = ""
+with open('stage3_test.csv', 'r', encoding = 'utf-8') as source, open('sorted.csv', 'w', encoding = 'utf-8') as dest:
+    reader = csv.DictReader(source)
+    #writer = csv.DictWriter(dest, fieldnames = [reader.fieldnames[0], reader.fieldnames[2], reader.fieldnames[4]])
+    
+    for row in reader:
+        words = row["Title"].split() + row["Description"].split()
+        for word in words:
+            cnt[word] += 1
+            if prev != "":
+                bigram = (prev, word)
+                bicnt[bigram]+=1
+            prev = word
+        
+    
+    
+    
+lenorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: len(t[0]), reverse=True))
+unorder = collections.OrderedDict(sorted(cnt.items(), key=lambda t: t[1], reverse=False))
+unique =0
+for k,v in unorder.items():
+    if v == 1:
+        unique+=1
+        
+print("#3")
+print("Most common", cnt.most_common(20))
+print("Least common", cnt.most_common()[-19:])
+print("Longest", list(lenorder.items())[0])
+print("Bigrams", bicnt.most_common(20))
+print("Unique", unique)
+print("Size", len(lenorder))
+
+
+
+
+
+
+
