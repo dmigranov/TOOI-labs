@@ -27,9 +27,11 @@ table, th, td {
 <body style = "background-color:silver">
 <h1 align = "center" style = "color:steelblue">Привет %s %s</h1> 
 
-<form action = "/cgi-bin/newpage.py" method = "get">
+<form action = "/cgi-bin/newpage.py" method = "post">
 First Name: <input type = "text" name = "first_name"> <br/>
-Last Name: <input type = "text" name = "last_name">
+Last Name: <input type = "text" name = "last_name"> <br/>
+Checkbox: <input type = "checkbox"> <br/>
+Radio: <input name="group1" type="radio" />
 <input type = "submit" value = "Submit" />
 </form>
 

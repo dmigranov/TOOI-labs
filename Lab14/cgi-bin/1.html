@@ -3,24 +3,23 @@
 <html>
 <head>
 <title>Йоу</title>
-<style>
-table, th, td {
-	border: 2px solid black;
-	border-collapse: collapse;
 
-}
-</style>
 </head>
 
 
 <body style = "background-color:silver">
 <h1 align = "center" style = "color:steelblue">Привет %s %s</h1> 
 
-<form action = "/cgi-bin/newpage.py" method = "post">
+<form action = "/cgi-bin/newpage.py" method = "get">
 First Name: <input type = "text" name = "first_name"> <br/>
-Last Name: <input type = "text" name = "last_name">
+Last Name: <input type = "text" name = "last_name"> <br/>
+Checkbox: <input type = "checkbox">
 <input type = "submit" value = "Submit" />
 </form>
+
+
+
+
 
 </body>
 
