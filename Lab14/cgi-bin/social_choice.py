@@ -18,21 +18,17 @@ print('''
 
 <body style = "background-color:silver">
 	<h1 align = "center" style = "color:steelblue">Добро пожаловать!</h1> 
-	<h1 align = "center" style = "color:green">Вы уже зарегистрированы?</h1> 
+	<h1 align = "center" style = "color:green">Пожалуйста, войдите в систему</h1> 
 
 
 	
 	<form action = "/cgi-bin/social_login.py" method = "post" >
 	<center>
-	<input type = "submit" value = "Да!"">
+	<input type = "submit" value = "Войти!">
 	</center>
 	</form>
 
-	<form action = "/cgi-bin/social_register.py" method = "post"">
-	<center>
-	<input type = "submit" value ="Пока нет"">
-	</center>
-	</form>
+
 
 
 
