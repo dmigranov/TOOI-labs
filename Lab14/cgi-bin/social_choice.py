@@ -27,6 +27,13 @@ print('''
 	<input type = "submit" value = "Войти!">
 	</center>
 	</form>
+	
+	
+	<form action = "/cgi-bin/social_register.py" method = "post ">
+	<center>
+	<input type = "submit" value = "Зарегистрироваться!">
+	</center>
+	</form>
 
 
 

@@ -8,7 +8,7 @@ print('''
 
 <html>
 <head>
-<title>Вход в Матрицу</title>
+<title>Регистрация</title>
 <br>
 
 
@@ -16,11 +16,11 @@ print('''
 
 
 <body style = "background-color:silver">
-	<h1 align = "center" style = "color:steelblue">Введите, пожалуйста, свои логин и пароль</h1> 
+	<h1 align = "center" style = "color:steelblue">Какие логин и пароль Вы хотите использовать?</h1> 
 
 
 	
-	<form action = "/cgi-bin/social.py" method = "post" >
+	<form action = "/cgi-bin/social_reg_handler.py" method = "post" >
 	<center>
 	Логин: <input type = "text" name = "login"> <br/>
 	Пароль: <input type = "text" name = "password"> <br/>
