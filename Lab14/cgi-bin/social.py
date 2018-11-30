@@ -30,14 +30,14 @@ print('''
 
 
 try:
-	with open(filename, 'r') as file:
+	with open(filename, 'r', encoding = 'utf-8') as file:
 		data = json.loads(file.read())
 		actualpassword = data['password']
 		if password == actualpassword:
 			message = form.getvalue('message')
 			if message != None:
 				data['messages'].append({"message" : message})
-				with open(filename, 'w') as file:
+				with open(filename, 'w', encoding = 'utf-8') as file:
 					json.dump(data, file)
 			print('''
 			<body style = "background-color:silver">

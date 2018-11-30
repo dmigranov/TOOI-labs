@@ -34,6 +34,12 @@ print('''
 	<input type = "submit" value = "Зарегистрироваться!">
 	</center>
 	</form>
+	
+	<form action = "/cgi-bin/social_getmessages.py" method = "post ">
+	<center>
+	<input type = "submit" value = "Что пишут?">
+	</center>
+	</form>
 
 
 

@@ -17,7 +17,7 @@ try:
 	with open(filename, 'r') as file:
 		string = "Имя уже занято..."
 except:
-	with open(filename, 'w') as file:
+	with open(filename, 'w', encoding = 'utf-8') as file:
 		jsonstring = json.dumps({"password" : password, "messages" : []})
 		file.write(jsonstring)
 		string = 'Успех! Теперь Вы можете залогиниться'
