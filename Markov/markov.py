@@ -20,10 +20,17 @@ def getTMatrix(filename):
         text = word_tokenize(file.read().replace('\n', ' '))
         str = getRidOfPunctuationAndUpperWords(text)
         #print(str)
+
         return computeTMatrix(str)
 
-def classify_text(tmatrices, dict_revs, histograms, filename):
-    print(0)
+def classifyText(filename, matrix):
+    with open(filename, 'r', encoding = 'utf-8') as file:
+        text = word_tokenize(file.read().replace('\n', ' '))
+        str = getRidOfPunctuationAndUpperWords(text)
+        #print(str)
+        
+
+
 
 def computeTMatrix(string):
     T = np.zeros([SYMBOLS,SYMBOLS])
@@ -33,22 +40,18 @@ def computeTMatrix(string):
         first = bigram[0]
         second = bigram[1]
         T[LetterIndices.index(first), LetterIndices.index(second)] += 1
-    return T
+
+    sums = np.sum(T, axis=1)
+
+    return T/sums[:, None]
 
 def getRidOfPunctuationAndUpperWords(text):
     #text.remove(',')
     toDeleteList = (',', '!', '?', '.', ';', ':', '\'', '"', '`')
-    #удаляем пунктуацию
-
-    #for w in text:
-        #if w[0].isupper():
-            #while w in text:
-            #text.remove(w)
-    #text = 
-
+    
 
     s = ' '.join(text)
-    
+    #удаляем пунктуацию
     table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”')
     s = s.translate(table)
     
@@ -57,6 +60,15 @@ def getRidOfPunctuationAndUpperWords(text):
     
 
 Vonnegut = getTMatrix("Vonnegut1.txt")
-Martin = getTMatrix("Martin1.txt")
-Lovecraft = getTMatrix("Lovecraft1.txt")
-print(Lovecraft)
+print(Vonnegut)
+#Martin = getTMatrix("Martin1.txt")
+#Lovecraft = getTMatrix("Lovecraft1.txt")
+
+
+
+#Pv = classifyText("Lovecraft2.txt", Vonnegut)
+
+
+
+
+
