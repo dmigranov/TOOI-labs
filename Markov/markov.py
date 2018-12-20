@@ -58,4 +58,5 @@ def getRidOfPunctuationAndUpperWords(text):
 
 Vonnegut = getTMatrix("Vonnegut1.txt")
 Martin = getTMatrix("Martin1.txt")
-print(Martin)
+Lovecraft = getTMatrix("Lovecraft1.txt")
+print(Lovecraft)
