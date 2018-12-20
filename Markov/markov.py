@@ -4,6 +4,7 @@ import nltk
 from nltk import word_tokenize
 from nltk import ngrams
 import string
+import re
 
 SYMBOLS = 27
 
@@ -14,12 +15,12 @@ def log0(x):
 
 
 #def compute_text_likelihood(filename, T, dict_rev, histogram, index):
-def compute_text_likelihood(filename):
+def getTMatrix(filename):
     with open(filename, 'r', encoding = 'utf-8') as file:
         text = word_tokenize(file.read().replace('\n', ' '))
         str = getRidOfPunctuationAndUpperWords(text)
-        print(str)
-        computeTMatrix(str)
+        #print(str)
+        return computeTMatrix(str)
 
 def classify_text(tmatrices, dict_revs, histograms, filename):
     print(0)
@@ -32,25 +33,29 @@ def computeTMatrix(string):
         first = bigram[0]
         second = bigram[1]
         T[LetterIndices.index(first), LetterIndices.index(second)] += 1
-    print(T)
+    return T
 
 def getRidOfPunctuationAndUpperWords(text):
     #text.remove(',')
     toDeleteList = (',', '!', '?', '.', ';', ':', '\'', '"', '`')
     #удаляем пунктуацию
-    #for punct in toDeleteList:
-        #while punct in text:
-            #text.remove(punct)
-    for w in text:
-        if w[0].isupper():
-            while w in text:
-                text.remove(w)
+
+    #for w in text:
+        #if w[0].isupper():
+            #while w in text:
+            #text.remove(w)
+    #text = 
+
+
     s = ' '.join(text)
-    table = str.maketrans('', '', ',!?.;:\'"`-“‘’')
+    
+    table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”')
     s = s.translate(table)
     
-    return " ".join(s.split())
+    return " ".join([w.lower() for w in s.split()])
     
     
 
-compute_text_likelihood("text.txt")
+Vonnegut = getTMatrix("Vonnegut1.txt")
+Martin = getTMatrix("Martin1.txt")
+print(Martin)
