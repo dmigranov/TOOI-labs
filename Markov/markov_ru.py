@@ -68,18 +68,19 @@ def getRidOfPunctuationAndUpperWords(text):
 Strugacki = getTMatrix("Strugacki1.txt")
 Bulgakov = getTMatrix("Bulgakov1.txt")
 Dostoevsky = getTMatrix("Dostoevsky1.txt")
+IP = getTMatrix("IP1.txt")
 
-TMatrices = [Strugacki, Bulgakov, Dostoevsky]
+TMatrices = [Strugacki, Bulgakov, Dostoevsky, IP]
 
-print("Русский язык: 1. Братья Стругацкие 2. Булгаков 3. Достоевский 4. Роулинг")
+print("Русский язык: 1. Братья Стругацкие 2. Булгаков 3. Достоевский 4. Ильф и Петров")
 PList = classifyText("Strugacki2.txt", TMatrices)
 print("Стругацкие", PList)
 PList = classifyText("Bulgakov2.txt", TMatrices)
 print("Булгаков", PList)
 PList = classifyText("Dostoevsky2.txt", TMatrices)
 print("Достоевский", PList)
-#PList = classifyText("Rowling2.txt", TMatrices)
-#print("Роулинг", PList)
+PList = classifyText("IP2.txt", TMatrices)
+print("Ильф и Петров", PList)
 
 
 
