@@ -1,0 +1,108 @@
+A:visited{
+	text-decoration: none;
+	color :  #000099;
+} 
+A:active{
+text-decoration: underline;
+color :  #000099;
+} 
+A:hover{
+text-decoration: underline;
+color :  #000099;	
+} 
+A:link {
+	text-decoration: none;
+	color : #000099;
+}
+
+BODY
+{
+	font-family: verdana;
+	font-size : 10pt;
+	background-image : url(../../../images/bckgr.gif);
+}
+tr {
+	font-family: verdana;
+}
+td {
+	font-family: verdana;
+}
+	
+H1{
+	font-size : 14pt;
+	font-weight : bold;
+text-align : center;
+}
+
+H2{
+font-size : 14pt;
+font-weight : normal;
+
+}
+
+H3 {
+font-size : 12pt;
+font-weight : bold;	
+}
+H4{
+font-size : 10pt;
+font-weight : bold;
+}
+
+H5
+{font-size : 14pt; font-weight : normal;}
+
+P
+{
+font-size : 10pt;
+font-weight : normal;
+font-family: verdana;
+} 
+table {
+	font-size : 10pt;
+	text-align : center;
+	vertical-align : middle;
+	ruby-align : center;
+	font-family: verdana;
+}
+.table{
+	font-size : 8pt;
+	text-align : center;
+}
+.menu{
+	font-size: 8pt;
+	
+}
+.newstable {
+	background-color: Gray;
+	color : White;
+	text-align: left;
+	font-weight : bold;
+	font-size: 10pt;
+}
+.linkmenu {
+color : #333333;
+}
+
+.pj
+{
+text-align : justify;
+}
+
+INPUT {
+	font-family: Verdana;
+	font-size: 10pt;
+}
+
+.htop
+{
+	font-size : 14pt;
+}
+.small {
+	font-size: 8pt;
+	font-family: verdana;
+}
+small{
+	font-size: 8pt;
+	font-family: verdana;
+}

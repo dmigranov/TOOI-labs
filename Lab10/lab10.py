@@ -119,7 +119,7 @@ class Director(Worker):
 company = Company()
 w1 = Worker('Vasya Krutoi', 15000)
 #w1.changeWage(10000)
-d1 = Director('Ivan Ivanov', 150000)
+d1 = Director('Ivan Ivanov', 15000)
 d1.changeWage(100000)
 
 company.addWorker(w1)

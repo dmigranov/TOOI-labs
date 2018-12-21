@@ -35,10 +35,11 @@ print(isDate("В 2015 году всё хорошо"))
 
 
 class MyTest(unittest.TestCase):
-    #def test_rand(self):
-    #    for i in range(0,10):
-    #        with self.subTest(i=i):
-    #            self.assertGreaterEqual(random.random(), 0.5)
+    #2
+    def test_rand(self):
+        for i in range(0,10):
+            with self.subTest(i=i):
+                self.assertGreaterEqual(random.random(), 0.5)
     #раскомментить
     def test_equal(self):
         self.assertTrue(subtract(3,6) == -3)

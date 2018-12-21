@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Some Applications of Markov Chain in Python | sandipanweb</title>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://sandipanweb.wordpress.com/xmlrpc.php">
+
+<link rel="dns-prefetch" href="https://s2.wp.com/">
+<link rel="dns-prefetch" href="https://s0.wp.com/">
+<link rel="dns-prefetch" href="https://s1.wp.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.pubmine.com/">
+<link rel="dns-prefetch" href="https://x.bidswitch.net/">
+<link rel="dns-prefetch" href="https://static.criteo.net/">
+<link rel="dns-prefetch" href="https://ib.adnxs.com/">
+<link rel="dns-prefetch" href="https://aax.amazon-adsystem.com/">
+<link rel="dns-prefetch" href="https://bidder.criteo.com/">
+<link rel="dns-prefetch" href="https://cas.criteo.com/">
+<link rel="dns-prefetch" href="https://gum.criteo.com/">
+<link rel="dns-prefetch" href="https://ads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://gads.pubmatic.com/">
+<link rel="dns-prefetch" href="https://tpc.googlesyndication.com/">
+<link rel="dns-prefetch" href="https://ad.doubleclick.net/">
+<link rel="dns-prefetch" href="https://googleads.g.doubleclick.net/">
+<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+<link rel="dns-prefetch" href="https://cdn.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.g.switchadhub.com/">
+<link rel="dns-prefetch" href="https://delivery.swid.switchadhub.com/">
+<link rel="alternate" type="application/rss+xml" title="sandipanweb » Feed" href="https://sandipanweb.wordpress.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="sandipanweb » Comments Feed" href="https://sandipanweb.wordpress.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="sandipanweb » Some Applications of Markov Chain in&nbsp;Python Comments Feed" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/feed/">
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function () {
+					oldonload();
+					func();
+				}
+			}
+		}
+		/* ]]> */
+	</script>
+			<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s0.wp.com\/wp-content\/mu-plugins\/wpcom-smileys\/twemoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/s2.wp.com\/wp-includes\/js\/wp-emoji-release.min.js?m=1532082729h&ver=5.0-RC3-43967"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/wp-emoji-release.js" type="text/javascript" defer="defer"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="all-css-0-1" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a_003.css" type="text/css" media="all">
+<link rel="stylesheet" id="hemingway-rewritten-fonts-css" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="all-css-2-1" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="print-css-3-1" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/global-print.css" type="text/css" media="print">
+<link rel="stylesheet" id="all-css-4-1" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a_002.js"></script>
+<link rel="stylesheet" id="all-css-0-2" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/style.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='https://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563h&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://sandipanweb.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://s1.wp.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Classifying a Face as Happy/Unhappy and Face Recognition using a Pre-trained Deep Inception Network with Keras in&nbsp;Python" href="https://sandipanweb.wordpress.com/2018/01/07/classifying-a-face-image-as-happy-unhappy-and-face-recognition-using-deep-learning-convolution-neural-net-with-keras-in-python/">
+<link rel="next" title="Hand-Gesture Classification using Deep Convolution and Residual Neural Network (ResNet-50) with Tensorflow / Keras in&nbsp;Python" href="https://sandipanweb.wordpress.com/2018/01/20/hand-gesture-classification-using-deep-convolution-and-residual-neural-network-with-tensorflow-keras-in-python/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/">
+<link rel="shortlink" href="https://wp.me/p7FrHN-23r">
+<link rel="alternate" type="application/json+oembed" href="https://public-api.wordpress.com/oembed/?format=json&amp;url=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="https://public-api.wordpress.com/oembed/?format=xml&amp;url=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Some Applications of Markov Chain in Python">
+<meta property="og:url" content="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/">
+<meta property="og:description" content="In this article a few simple applications of Markov chain are going to be discussed as a solution to a few text processing problems. These problems appeared as assignments in a few courses, the des…">
+<meta property="article:published_time" content="2018-01-12T23:33:10+00:00">
+<meta property="article:modified_time" content="2018-01-21T15:31:27+00:00">
+<meta property="og:site_name" content="sandipanweb">
+<meta property="og:image" content="https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png">
+<meta property="og:image:width" content="2784">
+<meta property="og:image:height" content="871">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:text:title" content="Some Applications of Markov Chain in&nbsp;Python">
+<meta name="twitter:card" content="summary">
+<meta property="fb:app_id" content="249643311490">
+<meta property="article:publisher" content="https://www.facebook.com/WordPresscom">
+
+<!-- End Jetpack Open Graph Tags -->
+<link rel="search" type="application/opensearchdescription+xml" href="https://sandipanweb.wordpress.com/osd.xml" title="sandipanweb">
+<link rel="search" type="application/opensearchdescription+xml" href="https://s1.wp.com/opensearch.xml" title="WordPress.com">
+<meta name="theme-color" content="#ffffff">
+<meta name="application-name" content="sandipanweb"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Simply Data Science"><meta name="msapplication-task" content="name=Subscribe;action-uri=https://sandipanweb.wordpress.com/feed/;icon-uri=https://sandipanweb.files.wordpress.com/2017/08/00535b8.jpg?w=16"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=https://s1.wp.com/i/favicon.ico"><meta name="description" content="In this article a few simple applications of Markov chain are going to be discussed as a solution to a few text processing problems. These problems appeared as assignments in a few courses, the descriptions are taken straightaway from the courses themselves. 1. Markov Model of Natural Language This problem appeared as an assignment in…">
+	<style type="text/css">
+			.site-title a,
+		.site-description {
+			color: #ffffff;
+		}
+				.site-header-image {
+			background-image: url(https://sandipanweb.files.wordpress.com/2017/06/cropped-im341.png);
+		}
+		</style>
+			<script type="text/javascript">
+		function __ATA_CC() {var v = document.cookie.match('(^|;) ?personalized-ads-consent=([^;]*)(;|$)');return v ? 1 : 0;}
+		var __ATA_PP = { pt: 1, ht: 0, tn: 'hemingway-rewritten', amp: false, siteid: 8982, consent: __ATA_CC() };
+		var __ATA = __ATA || {};
+		__ATA.cmd = __ATA.cmd || [];
+		__ATA.criteo = __ATA.criteo || {};
+		__ATA.criteo.cmd = __ATA.criteo.cmd || [];
+		</script>
+		<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/head.js" async=""></script><link rel="amphtml" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/amp/"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="https://sandipanweb.files.wordpress.com/2017/08/00535b8.jpg?w=32" sizes="32x32">
+<link rel="icon" href="https://sandipanweb.files.wordpress.com/2017/08/00535b8.jpg?w=183" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://sandipanweb.files.wordpress.com/2017/08/00535b8.jpg?w=180">
+<meta name="msapplication-TileImage" content="https://sandipanweb.files.wordpress.com/2017/08/00535b8.jpg?w=183">
+<script type="text/javascript">
+	window.google_analytics_uacct = "UA-52447-2";
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'wordpress.com']);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script type="text/javascript" async="" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ga.js"></script>
+<style type="text/css"></style><link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/services.css"></head>
+
+<body class="post-template-default single single-post postid-7901 single-format-standard mp6 customizer-styles-applied highlander-enabled highlander-light">
+<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-header-image" style="bottom: -136px;">
+			<div class="site-branding-wrapper" style="opacity: 0.114967;">
+				<div class="site-branding">
+					<h1 class="site-title"><a href="https://sandipanweb.wordpress.com/" rel="home">sandipanweb</a></h1>
+					<h2 class="site-description">Simply Data Science</h2>
+				</div>
+			</div>
+		</div>
+	</header><!-- #masthead -->
+	<nav id="site-navigation" class="main-navigation clear" role="navigation">
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><span class="screen-reader-text">Menu</span></button>
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<div class="menu-primary-container"><ul id="primary-menu" class="menu nav-menu" aria-expanded="false"><li id="menu-item-8" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8"><a href="https://sandipanweb.wordpress.com/">Home</a></li>
+<li id="menu-item-9" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9"><a href="https://sandipanweb.wordpress.com/about/">About</a></li>
+<li id="menu-item-10" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="https://sandipanweb.wordpress.com/contact/">Contact</a></li>
+</ul></div>		<div id="header-search-toggle">
+			<span class="screen-reader-text">Search</span>
+		</div>
+		<div id="header-search">
+			<form role="search" method="get" class="search-form" action="https://sandipanweb.wordpress.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form>		</div>
+	</nav><!-- #site-navigation -->
+	<div id="content" class="site-content">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+					
+			
+<article id="post-7901" class="post-7901 post type-post status-publish format-standard hentry category-data-mining category-data-processing category-math category-mathematical-modeling category-python category-text-mining">
+	<header class="entry-header">
+					<h1 class="entry-title">Some Applications of Markov Chain in&nbsp;Python</h1>				<div class="entry-meta">
+			<span class="posted-on"><a href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/" rel="bookmark"><time class="entry-date published" datetime="2018-01-12T23:33:10+00:00">January 12, 2018</time><time class="updated" datetime="2018-01-21T15:31:27+00:00">January 21, 2018</time></a></span><span class="byline"><span class="sep"> / </span><span class="author vcard"><a class="url fn n" href="https://sandipanweb.wordpress.com/author/sandipandey/">Sandipan Dey</a></span></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>In this article a few simple applications of Markov chain are going
+ to be discussed as a solution to a few text processing problems. These 
+problems appeared as assignments in a few courses, the descriptions are 
+taken straightaway from the courses themselves.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Markov-Model-of-Natural-Language">1. Markov Model of Natural Language</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">This problem appeared as an assignment in the <a href="http://www.cs.princeton.edu/courses/archive/fall13/cos126/assignments/markov.html">Princeton course&nbsp;cos126</a>&nbsp;.&nbsp;This assignment was developed by <strong>Prof. Bob Sedgewick</strong> and <strong>Kevin Wayne</strong>, based on the classic idea of Claude Shannon.</div>
+<div></div>
+<div>
+<h2>Problem Statement</h2>
+<p>Use a Markov chain to create a statistical model of a piece of 
+English text. Simulate the Markov chain to generate stylized 
+pseudo-random text.</p>
+<p><strong>Perspective.</strong>&nbsp;In the 1948 landmark paper&nbsp;<a href="http://cm.bell-labs.com/cm/ms/what/shannonday/shannon1948.pdf">A Mathematical Theory of Communication</a>,
+ Claude Shannon founded the field of information theory and 
+revolutionized the telecommunications industry, laying the groundwork 
+for today’s Information Age. In this paper, Shannon proposed using 
+a&nbsp;<em>Markov chain</em>&nbsp;to create a statistical model of the 
+sequences of letters in a piece of English text. Markov chains are now 
+widely used in speech recognition, handwriting recognition, information 
+retrieval, data compression, and spam filtering. They also have many 
+scientific computing applications including&nbsp;the genemark algorithm 
+for gene prediction, the Metropolis algorithm for measuring 
+thermodynamical properties, and Google’s PageRank algorithm for Web 
+search. For this assignment, we consider a whimsical variant: generating
+ stylized pseudo-random text.</p>
+<p><b>Markov model of natural language.</b>&nbsp;Shannon approximated the statistical structure of a piece of text using a simple mathematical model known as a&nbsp;<em>Markov model</em>. A Markov model of&nbsp;<em>order</em>&nbsp;0
+ predicts that each letter in the alphabet occurs with a fixed 
+probability.&nbsp;We can fit a Markov model of order 0 to a specific 
+piece of text by counting the number of occurrences of each letter in 
+that text, and using these frequencies as probabilities. For example, if
+ the input text is&nbsp;<tt>"gagggagaggcgagaaa"</tt>, the Markov model of order 0 predicts that each letter is&nbsp;<tt>'a'</tt>&nbsp;with probability 7/17,&nbsp;<tt>'c'</tt>&nbsp;with probability 1/17, and&nbsp;<tt>'g'</tt>&nbsp;with
+ probability 9/17 because these are the fraction of times each letter 
+occurs. The following sequence of letters is a typical example generated
+ from this model:</p>
+<blockquote>
+<pre>g a g g c g a g a a g a g a a g a a a g a g a g a g a a a g a g a a g ...
+</pre>
+</blockquote>
+<p>A Markov model of order 0 assumes that each letter is chosen 
+independently. This independence does not coincide with statistical 
+properties of English text because there a high correlation among 
+successive letters in a word or sentence. For example,&nbsp;<tt>'w'</tt>&nbsp;is more likely to be followed with&nbsp;<tt>'e'</tt>&nbsp;than with&nbsp;<tt>'u'</tt>, while&nbsp;<tt>'q'</tt>&nbsp;is more likely to be followed with&nbsp;<tt>'u'</tt>&nbsp;than with&nbsp;<tt>'e'</tt>.</p>
+<p>We obtain a more refined model by allowing the probability of 
+choosing each successive letter to depend on the preceding letter or 
+letters. A&nbsp;<em>Markov model of order k</em>&nbsp;predicts that each letter occurs with a fixed probability, but that probability can depend on the previous&nbsp;<em>k</em>&nbsp;consecutive letters. Let a&nbsp;<em>k-gram</em>&nbsp;mean any&nbsp;<em>k</em>&nbsp;consecutive letters. Then for example, if the text has 100 occurrences of&nbsp;<tt>"th"</tt>, with 60 occurrences of&nbsp;<tt>"the"</tt>, 25 occurrences of&nbsp;<tt>"thi"</tt>, 10 occurrences of&nbsp;<tt>"tha"</tt>, and 5 occurrences of&nbsp;<tt>"tho"</tt>, the Markov model of order 2 predicts that the next letter following the 2-gram&nbsp;<tt>"th"</tt>&nbsp;is&nbsp;<tt>'e'</tt>&nbsp;with probability 3/5,&nbsp;<tt>'i'</tt>&nbsp;with probability 1/4,&nbsp;<tt>'a'</tt>&nbsp;with probability 1/10, and&nbsp;<tt>'o'</tt>&nbsp;with probability 1/20.</p>
+<p><strong>A brute-force solution.</strong>&nbsp;Claude Shannon proposed a brute-force scheme to generate text according to a Markov model of order 1:</p>
+<blockquote><p><em>“ To construct [a Markov model of order 1], for 
+example, one opens a book at random and selects a letter at random on 
+the page. This letter is recorded. The book is then opened to another 
+page and one reads until this letter is encountered. The succeeding 
+letter is then recorded. Turning to another page this second letter is 
+searched for and the succeeding letter recorded, etc. It would be 
+interesting if further approximations could be constructed, but the 
+labor involved becomes enormous at the next stage. ”</em></p></blockquote>
+<p>Our task is to write a python program to automate this laborious task
+ in a more efficient way — Shannon’s brute-force approach&nbsp;is 
+prohibitively slow when the size of the input text is large.</p>
+</div>
+<div>
+<p><strong><br>
+Markov model data type.</strong>&nbsp;Create an immutable data type&nbsp;<b><tt>MarkovModel</tt></b>&nbsp;to represent a Markov model of order&nbsp;<em>k</em>&nbsp;from a given text string. The data type must implement the following API:</p>
+<p><img data-attachment-id="7902" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/markovapi/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/markovapi.png?w=889&amp;h=512" data-orig-size="740,426" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="markovapi" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/markovapi.png?w=889&amp;h=512?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/markovapi.png?w=889&amp;h=512?w=676" class="alignnone  wp-image-7902" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/markovapi.png" alt="markovapi.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/markovapi.png 740w, https://sandipanweb.files.wordpress.com/2018/01/markovapi.png?w=150&amp;h=86 150w, https://sandipanweb.files.wordpress.com/2018/01/markovapi.png?w=300&amp;h=173 300w" sizes="(max-width: 889px) 100vw, 889px" width="889" height="512"></p>
+<ul>
+<li><em>Constructor.</em>&nbsp;To implement the data type, create a symbol table, whose keys will be&nbsp;<tt>String</tt><em>k</em>-grams. You may assume that the input text is a sequence of characters over the ASCII alphabet so that all&nbsp;<tt>char</tt>&nbsp;values
+ are between 0 and 127. The value type of your symbol table needs to be a
+ data structure that can represent the frequency of each possible next 
+character. The frequencies should be tallied as if the text were&nbsp;<b>circular</b>&nbsp;(i.e., as if it repeated the first&nbsp;<em>k</em>&nbsp;characters at the end).</li>
+<li><em>Order.</em>&nbsp;Return the order&nbsp;<em>k</em>&nbsp;of the Markov Model.</li>
+<li><em>Frequency.</em>&nbsp;There are two frequency methods.
+<ul>
+<li><tt>freq(kgram)</tt>&nbsp;returns the number of times the&nbsp;<em>k</em>-gram was found in the original text.</li>
+<li><tt>freq(kgram, c)</tt>&nbsp;returns the number of times the&nbsp;<em>k</em>-gram was followed by the character&nbsp;<tt>c</tt>&nbsp;in the original text.</li>
+</ul>
+</li>
+<li><em>Randomly generate a character.</em>&nbsp;Return a character. It must be a character that followed the&nbsp;<em>k</em>-gram in the original text. The character should be chosen randomly, but the results of calling&nbsp;<tt>rand(kgram)</tt>&nbsp;several times should mirror the frequencies of characters that followed the&nbsp;<em>k</em>-gram in the original text.</li>
+<li><em>Generate pseudo-random text.</em>&nbsp;Return a&nbsp;<tt>String</tt>&nbsp;of length&nbsp;<em>T</em>&nbsp;that is a randomly generated stream of characters whose first&nbsp;<em>k</em>&nbsp;characters are the argument&nbsp;<tt>kgram</tt>. Starting with the argument&nbsp;<tt>kgram</tt>, repeatedly call&nbsp;<tt>rand()</tt>&nbsp;to generate the next character. Successive&nbsp;<em>k</em>-grams should be formed by using the most recent&nbsp;<em>k</em>&nbsp;characters in the newly generated text. Use a&nbsp;<tt>StringBuilder</tt>&nbsp;object
+ to build the stream of characters (otherwise, as we saw when discussing
+ performance, your code will take order of&nbsp;<i>N</i><sup>2</sup>&nbsp;time to generate&nbsp;<i>N</i>&nbsp;characters, which is too slow).</li>
+</ul>
+<p>To avoid dead ends, treat the input text as a&nbsp;<b>circular</b>&nbsp;string: the last character is considered to precede the first character.</p>
+<p>For example, if&nbsp;<em>k</em>&nbsp;= 2 and the text is the 17-character string&nbsp;<tt>"gagggagaggcgagaaa"</tt>, then the salient features of the Markov model are captured in the table below:</p>
+<blockquote>
+<pre>               frequency of   probability that
+                next char       next char is 
+kgram   freq    a   c   g        a    c    g
+----------------------------------------------
+ aa      2      1   0   1       1/2   0   1/2  
+ ag      5      3   0   2       3/5   0   2/5  
+ cg      1      1   0   0        1    0    0
+ ga      5      1   0   4       1/5   0   4/5  
+ gc      1      0   0   1        0    0    1  
+ gg      3      1   1   1       1/3  1/3  1/3  
+----------------------------------------------
+        17      7   1   9</pre>
+<p>Taken from an example from the <a href="http://www.cs.princeton.edu/courses/archive/fall13/cos126/assignments/markov.html">same assignment</a>.</p></blockquote>
+<p>Note that the frequency of&nbsp;<tt>"ag"</tt>&nbsp;is 5 (and not 4) because we are treating the string as circular.</p>
+<p>A&nbsp;<i>Markov chain</i>&nbsp;is a stochastic process where the 
+state change depends on only the current state. For text generation, the
+ current state is a&nbsp;<i>k</i>-gram.&nbsp;The next character is 
+selected at random, using the probabilities from the Markov model. For 
+example, if the current state is&nbsp;<tt>"ga"</tt>&nbsp;in the Markov model of order 2 discussed above, then the next character is&nbsp;<tt>'a'</tt>&nbsp;with probability 1/5 and&nbsp;<tt>'g'</tt>&nbsp;with
+ probability 4/5. The next state in the Markov chain is obtained by 
+appending the new character to the end of the&nbsp;<em>k</em>-gram and discarding the first character. A&nbsp;<em>trajectory</em>&nbsp;through the Markov chain is a sequence of such states. Below is a possible trajectory consisting of 9 transitions.</p>
+<blockquote>
+<pre>trajectory:          ga  --&gt;  ag  --&gt;  gg  --&gt;  gc  --&gt;  cg  --&gt;  ga  --&gt;  ag  --&gt;  ga  --&gt;  aa  --&gt;  ag
+probability for a:       1/5      3/5      1/3       0        <b>1</b>       1/5      <b>3/5</b><b>1/5</b>      1/2
+probability for c:        0        0       <b>1/3</b>       0        0        0        0        0        0
+probability for g:       <b>4/5      </b><b>2/5</b>      1/3       <b>1</b>        0       <b>4/5</b>      2/5      4/5      <b>1/2
+</b></pre>
+<blockquote><p>Taken from an example from the <a href="http://www.cs.princeton.edu/courses/archive/fall13/cos126/assignments/markov.html">same assignment</a>.</p></blockquote>
+</blockquote>
+<p>Treating the input text as a circular string ensures that the Markov chain never gets stuck in a state with no next characters.</p>
+<p>To generate random text from a Markov model of order&nbsp;<em>k</em>, set the initial state to&nbsp;<em>k</em>&nbsp;characters from the input text. Then, simulate a trajectory through the Markov chain by performing&nbsp;<em>T − k</em>&nbsp;transitions, appending the random character selected at each step. For example, if&nbsp;<em>k</em>&nbsp;= 2 and&nbsp;<em>T</em>&nbsp;= 11, the following is a possible trajectory leading to the output&nbsp;<tt>gaggcgagaag</tt>.</p>
+<blockquote>
+<pre>trajectory:          ga  --&gt;  ag  --&gt;  gg  --&gt;  gc  --&gt;  cg  --&gt;  ga  --&gt;  ag  --&gt;  ga  --&gt;  aa  --&gt;  ag
+output:              <b>ga        g        g        c        g        a        g        a        a        g</b></pre>
+</blockquote>
+<p><strong>Text generation client.</strong>&nbsp;Implement a client program&nbsp;<b><tt>TextGenerator</tt></b>&nbsp;that takes two command-line integers&nbsp;<em>k</em>&nbsp;and&nbsp;<em>T</em>, reads the input text from standard input and builds a Markov model of order&nbsp;<em>k</em>&nbsp;from the input text; then, starting with the&nbsp;<em>k</em>-gram consisting of the&nbsp;<b>first&nbsp;<em>k</em>&nbsp;letters of the input text</b>, prints out&nbsp;<em>T</em>&nbsp;characters
+ generated by simulating a trajectory through the corresponding Markov 
+chain. We may assume that the text has length at least&nbsp;<em>k</em>, and also that&nbsp;<em>T</em>&nbsp;≥&nbsp;<em>k</em>.</p>
+<h2>A Python Implementation</h2>
+<pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict
+
+</span>class <span class="nc">MarkovModel</span><span class="p">:
+</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span> 
+        <span class="sd">'''</span>
+<span class="sd">        create a Markov model of order k from given text</span>
+<span class="sd">        Assume that text has length at least k.</span>
+<span class="sd">        '''</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>               
+        <span class="bp">self</span><span class="o">.</span><span class="n">tran</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alph</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kgrams</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="n">text</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tran</span><span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">],</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">]]</span> <span class="o">+=</span> <span class="mf">1.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kgrams</span><span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                   <span class="c"># order k of Markov model</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>
+
+    <span class="k">def</span> <span class="nf">freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kgram</span><span class="p">):</span>             <span class="c"># number of occurrences of kgram in text</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">kgram</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>    <span class="c"># (check if kgram is of length k)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">kgrams</span><span class="p">[</span><span class="n">kgram</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">freq2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kgram</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>   	<span class="c"># number of times that character c follows kgram</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">kgram</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>     <span class="c"># (check if kgram is of length k)</span>  
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tran</span><span class="p">[</span><span class="n">kgram</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>  
+
+    <span class="k">def</span> <span class="nf">rand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kgram</span><span class="p">):</span>             <span class="c"># random character following given kgram</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">kgram</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>    <span class="c"># (check if kgram is of length k.</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tran</span><span class="p">[</span><span class="n">kgram</span><span class="p">,</span> <span class="n">alph</span><span class="p">]</span> <span class="k">for</span> <span class="n">alph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alph</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alph</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tran</span><span class="p">[</span><span class="n">kgram</span><span class="p">,</span> <span class="n">alph</span><span class="p">]</span> <span class="k">for</span> <span class="n">alph</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alph</span><span class="p">])</span><span class="o">/</span><span class="n">Z</span><span class="p">)
+</span>
+<span class="k">    def</span> <span class="nf">gen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kgram</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>           <span class="c"># generate a String of length T characters</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">kgram</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span>    <span class="c"># by simulating a trajectory through the corresponding</span>
+        <span class="nb">str</span> <span class="o">=</span> <span class="s">''                       <span class="c"># Markov chain. The first k characters of the newly</span></span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):             <span class="c"># generated String should be the argument kgram.</span></span>
+             <span class="c">#print kgram, c           # check if kgram is of length k.</span>
+             <span class="n">c</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">kgram</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c"># Assume that T is at least k.</span>
+             <span class="n">kgram</span> <span class="o">=</span> <span class="n">kgram</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">c</span>     
+             <span class="nb">str</span> <span class="o">+=</span> <span class="n">c</span>			 
+        <span class="k">return</span> <span class="nb">str</span></pre>
+<h2></h2>
+<h2>Some Results</h2>
+<pre><span class="n">m</span> <span class="o">=</span> <span class="n">MarkovModel</span><span class="p">(</span><span class="s">'gagggagaggcgagaaa'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></pre>
+<p>generates the following MarkovChain where each state represents a 2-gram.</p>
+<p><img data-attachment-id="7903" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mc/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mc.png?w=665&amp;h=1179" data-orig-size="361,639" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mc" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mc.png?w=665&amp;h=1179?w=169" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mc.png?w=665&amp;h=1179?w=361" class="alignnone  wp-image-7903" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mc.png" alt="mc.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mc.png 361w, https://sandipanweb.files.wordpress.com/2018/01/mc.png?w=85&amp;h=150 85w, https://sandipanweb.files.wordpress.com/2018/01/mc.png?w=169&amp;h=300 169w" sizes="(max-width: 665px) 100vw, 665px" width="665" height="1179"></p>
+</div>
+<p>&nbsp;</p>
+<hr>
+<hr>
+<h4><span style="color:green;">Input: news item (taken from the assignment)</span></h4>
+<p>Microsoft said Tuesday the company would comply with a preliminary 
+ruling by Federal District Court Judge Ronald H. Whyte that Microsoft is
+ no longer able to use the Java Compatibility Logo on its packaging and 
+websites for Internet Explorer and Software Developers Kit for Java.</p>
+<p>“We remain confident that once all the facts are presented in the 
+larger case, the court will find Microsoft to be in full compliance with
+ its contract with Sun,” stated Tom Burt, Associate General Counsel for 
+Microsoft Corporation. “We are disappointed with this decision, but we 
+will immediately comply with the Court’s order.”</p>
+<p>Microsoft has been in the forefront of helping developers use the 
+Java programming language to write cutting-edge applications. The 
+company has committed significant resources so that Java developers have
+ the option of taking advantage of Windows features when writing 
+software using the Java language. Providing the best tools and 
+programming options will continue to be Microsoft’s goal.</p>
+<p>“We will continue to listen to our customers and provide them the 
+tools they need to write great software using the Java language,” added 
+Tod Nielsen, General Manager for Microsoft’s Developer Relations 
+Group/Platform Marketing.</p>
+<p><strong>Markov Model learnt</strong></p>
+<p><img data-attachment-id="7904" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mc1/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=676" data-orig-size="1374,32767" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mc1" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=676?w=13" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=676?w=43" class="alignnone size-full wp-image-7904" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mc1.png" alt="mc1.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=1352 1352w, https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/mc1.png?w=43 43w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<h4><span style="color:green;">Generated output: random news item, using input as an order 7 model</span></h4>
+<p>&nbsp;</p>
+<p>Microsoft is no longer able to use the Java language,” added Tod 
+Nielsen, General Counsel for Microsoft’s Developers use the Java 
+Compatibility Logo on its packaging and websites for Internet Explorer 
+and Software Developer Relations Group/Platform Marketing.Microsoft to 
+be Microsoft Corporation. “We are disappointed with the Court’s order.”</p>
+<p>Microsoft is no longer able to use the Java language. Providing the 
+best tools and provide them the tools and programming options will 
+continue to listen to our customers and provide them the tools and 
+programming option of taking advantage of Windows features when writing 
+software using the Java Compatibility Logo on its packaging and websites
+ for Internet Explorer and Software using the Java programming option of
+ taking advantage of Windows features when writing software Developer 
+Relations Group/Platform Marketing.Microsoft to be in full compliance 
+with its contract with Sun,” stated Tom Burt, Associate General Manager 
+for Microsoft’s goal.</p>
+<p>“We will continue to listen to our customers and programming 
+language. Providing the Java language,” added Tod Nielsen, General 
+Manager for Microsoft is no longer able to use the Java language.</p>
+<hr>
+<h2>Noisy Text Correction</h2>
+<p>Imagine we receive a message where some of the characters have been corrupted by noise. We represent unknown characters by the <strong>~</strong> symbol (we assume we don’t use ~ in our messages). Add a method&nbsp;<tt>replaceUnknown&nbsp;</tt>that decodes a noisy message by replacing each <strong>~</strong> with the most likely character given our order&nbsp;<i>k</i>&nbsp;Markov model, and conditional on the surrounding text:</p>
+<blockquote>
+<pre>def <em>replaceUnknown</em>(corrupted)  # replace unknown characters with most probable characters
+</pre>
+</blockquote>
+<p>Assume unknown characters are at least&nbsp;<em>k</em>&nbsp;characters apart and also appear at least&nbsp;<em>k</em>&nbsp;characters away from the start and end of the message.&nbsp;&nbsp;This <strong>maximum-likelihood</strong> approach doesn’t always get it perfect, but it fixes most of the missing characters correctly.</p>
+<p>Here are some details on what it means to find the most likely 
+replacement for each ~. For each unknown character, you should consider 
+all possible replacement characters. We want the replacement character 
+that makes sense not only at the unknown position (given the previous 
+characters) but also when the replacement is used in the context of 
+the&nbsp;<em>k</em>&nbsp;subsequent known characters. For example we expect the unknown character in&nbsp;<tt>"was ~he wo"</tt>&nbsp;to be&nbsp;<tt>'t'</tt>&nbsp;and not simply the most likely character in the context of&nbsp;<tt>"was "</tt>. You can compute the probability of each hypothesis by multiplying the probabilities of generating each of&nbsp;<em>k</em>+1 characters in sequence: the missing one, and the&nbsp;<em>k</em>&nbsp;next ones. The following figure illustrates how we want to consider <strong>k+1</strong> windows to <strong>maximize</strong> the l<strong>og-likelihood</strong>:</p>
+<p><img data-attachment-id="7922" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/correct/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/correct1.png?w=665&amp;h=378" data-orig-size="540,307" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="correct" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/correct1.png?w=665&amp;h=378?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/correct1.png?w=665&amp;h=378?w=540" class="alignnone  wp-image-7922" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/correct1.png" alt="correct.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/correct1.png 540w, https://sandipanweb.files.wordpress.com/2018/01/correct1.png?w=150&amp;h=85 150w, https://sandipanweb.files.wordpress.com/2018/01/correct1.png?w=300&amp;h=171 300w" sizes="(max-width: 665px) 100vw, 665px" width="665" height="378"></p>
+<p>Using the&nbsp;algorithm described&nbsp;above, here are the results obtained for the following example:</p>
+<p><strong>Original</strong> : it was the best of times, it was the worst of times.<br>
+<span style="color:#ff0000;"><strong>Noisy</strong> </span>:&nbsp; &nbsp; &nbsp; it w~s th~ bes~ of tim~s, i~ was ~he wo~st of~times.<br>
+<span style="color:#00ff00;"><strong>Corrected (k=4)</strong></span>:&nbsp;it was the best of times, it was the worst of times.<br>
+<span style="color:#99cc00;"><strong>Corrected (k=2)</strong></span>:&nbsp;it was the best of times, in was the wo st of times.</p>
+<p>&nbsp;</p>
+<h1>2. Detecting authorship</h1>
+<p>This problem appeared as an assignment in the <a href="http://www.cs.cornell.edu/courses/cs1114/2009sp/assignments/A6.pdf">Cornell course&nbsp;cs1114</a>&nbsp;.</p>
+<h2>The Problem Statement</h2>
+<p>In this assignment, we shall be implementing an authorship detector which, when<br>
+given a large sample size of text to train on, can then guess the author of an unknown<br>
+text.</p>
+<ul>
+<li>The algorithm to be implemented works based on the following idea: An author’s<br>
+writing style can be defined quantitatively by looking at the words he 
+uses. Specifically, we want to keep track of his word flow – that is, 
+which words he tends to use&nbsp;after other words.</li>
+<li>To make things significantly simpler, we’re going to assume that the author always<br>
+follows a given word with the same distribution of words. Of course, this isn’t true,<br>
+since the words you choose when writing obviously depend on context. 
+Nevertheless,&nbsp;this simplifying assumption should hold over an 
+extended amount of text, where&nbsp;context becomes less relevant.</li>
+<li>In order to implement this model of an author’s writing style, we will use a <strong>Markov</strong><br>
+<strong>chain</strong>. A Markov chain is a set of states with the Markov property – that is, the<br>
+probabilities of each state are independent from the probabilities of 
+every other state.&nbsp;This behavior correctly models our assumption of
+ word independence.</li>
+<li>A Markov chain can be represented as a directed graph. Each node is a state (words,<br>
+in our case), and a directed edge going from state Si to Sj represents 
+the probability we&nbsp;will go to Sj when we’re at Si. We will 
+implement this directed graph as a transition&nbsp;matrix. Given a set 
+of words W1, W2, …Wn, we can construct an n by n transition&nbsp;matrix 
+A, where an edge from Wi to Wj of weight p means Aij = p.</li>
+<li>The edges, in this case, represent the probability that word j follows word i from the<br>
+given author. This means, of course, that the sum of the weights of all edges leaving<br>
+from each word must add up to 1.</li>
+<li>We can construct this graph from a large sample text corpus. Our 
+next step would be&nbsp;finding the author of an unknown, short chunk of
+ text. To do this, we simply compute&nbsp;the probability of this 
+unknown text occurring, using the words in that order, in each&nbsp;of 
+our Markov chains. The author would likely be the one with the highest 
+probability.</li>
+<li>We shall implement the <strong>Markov chain model</strong> of <strong>writing style</strong>. We are given some&nbsp;sample texts to <strong>train</strong> our model on, as well as some challenges for you to<br>
+figure out.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>Constructing the transition matrix</h2>
+<p>Our first step is to construct the transition matrix representing our Markov chain.<br>
+First, we must read the text from a sample file.&nbsp;We shall want to create a sparse array using the <em><strong>scipy csr sparse matrix</strong></em>.
+ Along&nbsp;with the transition matrix, we shall be creating a 
+corresponding vector that contains&nbsp;2&nbsp;word frequencies 
+(normalized by the total number of words in the document 
+(including&nbsp;repeated words)).</p>
+<h2>Calculating likelihood</h2>
+<p>Once we have our transition matrix, we can calculate the likelihood of an <strong>unknown</strong><br>
+<strong>sample of text.</strong> We are given several pieces of literature by various authors,<br>
+as well as excerpts from each of the authors as test dataset. Our goal is to identify the authors&nbsp;of each excerpt.</p>
+<p>To do so, we shall need to calculate the likelihood of the excerpt 
+occurring in each author’s&nbsp;transition matrix. Recall that each edge
+ in the directed graph that the transition<br>
+matrix represents is the probability that the author follows a word with another.<br>
+Since we shall be multiplying numerous possibly small probabilities together, our<br>
+calculated <strong>likelihood</strong> will likely be extremely small. Thus, you should compare <strong>log(likelihood)&nbsp;</strong>instead.
+ Keep in mind the possibility that the author may have used a word he 
+has&nbsp;never used before. Our calculated likelihood should not 
+eliminate an author completely&nbsp;because of this. We shall be 
+imposing a high penalty if a word is missing.</p>
+<h2>Finding the author with the maximum likelihood</h2>
+<p>Now that we can compute likelihoods, the next step is to write a 
+routine that takes a&nbsp;set of transition matrices and dictionaries, 
+and a sequence&nbsp;of text, and returns the index of the transition 
+matrix that results in the highest likelihood. You will write this in a 
+function&nbsp;<em>classify text</em>, which takes transition matrices, 
+dictionaries, histograms, and the name of the file containing the test 
+text, and returns a single&nbsp;integer best index.&nbsp; The following 
+figure shows how to detect an author k (<strong>A_k</strong>)<em><strong>&nbsp;</strong></em>of the test text <em><strong>t_1..t_n</strong>&nbsp;</em> using the transition matrix<em> <strong>P_k</strong> with&nbsp;<strong>MLE </strong></em>:</p>
+<p><img data-attachment-id="7923" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/ad/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/ad1.png?w=623&amp;h=344" data-orig-size="409,226" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="ad" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/ad1.png?w=623&amp;h=344?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/ad1.png?w=623&amp;h=344?w=409" class="alignnone  wp-image-7923" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad1.png" alt="ad.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/ad1.png 409w, https://sandipanweb.files.wordpress.com/2018/01/ad1.png?w=150&amp;h=83 150w, https://sandipanweb.files.wordpress.com/2018/01/ad1.png?w=300&amp;h=166 300w" sizes="(max-width: 623px) 100vw, 623px" width="623" height="344"></p>
+<h2>Python Implementation</h2>
+<blockquote><p>from np import log<br>
+def log0(x):<br>
+return 0 if x &lt;= 0 else log(x)</p>
+<p>def <em>compute_text_likelihood</em>(filename, T, dict_rev, histogram, index):</p>
+<p>”’<br>
+Compute the (log) likelihood L of a given string (in ‘filename’) given<br>
+a word transition probability T, dictionary ‘dict’, and histogram<br>
+‘histogram’<br>
+”’</p>
+<p>text = word_tokenize(open(filename).read().replace(‘\n’, ‘ ‘).lower())<br>
+num_words = len(text)<br>
+text = [word for word in text if word in histogram] # keep only the words that are found in the training dataset<br>
+ll = log0(histogram[text[0]]) – log0(sum(histogram.values()))<br>
+for i in range(1, len(text)):<br>
+ll += log0(T[dict_rev[text[i-1]], dict_rev[text[i]]])<br>
+return ll + (num_words – num_matches)*penalty</p>
+<p>def <em>classify_text</em>(tmatrices, dict_revs, histograms, filename):</p>
+<p>”’<br>
+Return the index of the most likely author given the&nbsp;transition matrices, dictionaries, and a test file<br>
+”’</p>
+<p>for i in range(len(tmatrices)):<br>
+ll = compute_text_likelihood(filename, tmatrices[i], dict_revs[i], histograms[i], i)</p>
+<p>print i, ll</p></blockquote>
+<h2>Training Dataset</h2>
+<p>The list of authors whose writings are there in the training dataset:</p>
+<p><strong>0.&nbsp;Austen<br>
+</strong><strong>1. Carroll<br>
+</strong><strong>2. Hamilton<br>
+</strong><strong>3. Jay<br>
+</strong><strong>4. Madison<br>
+</strong><strong>5. Shakespeare<br>
+</strong><strong>6. Thoreau<br>
+</strong><strong>7. Twain</strong></p>
+<p>&nbsp;</p>
+<h2>A few lines of excerpts from the training files (the<br>
+literature by several authors, taken from Project Gutenberg), the <a href="https://stackoverflow.com/questions/16645799/how-to-create-a-word-cloud-from-a-corpus-in-python">word clouds</a>&nbsp;and a few states from the corresponding Markov Models Constructed for a few authors</h2>
+<p>&nbsp;</p>
+<p><strong><span style="color:#ff0000;">Author&nbsp;JANE AUSTEN</span> (</strong>Texts taken from<strong> Emma,&nbsp;Mansfield Park,&nbsp;Pride and Prejudice)</strong></p>
+<p>Emma Woodhouse, handsome, clever, and rich, with a comfortable home and<br>
+happy disposition, seemed to unite some of the best blessings of<br>
+existence; and had lived nearly twenty-one years in the world with very<br>
+little to distress or vex her.</p>
+<p>She was the youngest of the two daughters of a most affectionate,<br>
+indulgent father; and had, in consequence of her sister’s marriage,<br>
+been mistress of his house from a very early period. Her mother had<br>
+died too long ago for her to have more than an indistinct remembrance<br>
+of her caresses; and her place had been supplied by an excellent woman<br>
+as governess, who had fallen little short of a mother in affection.</p>
+<p>Sixteen years had Miss Taylor been in Mr. Woodhouse’s family, less as a<br>
+governess than a friend, very fond of both daughters, but particularly<br>
+of Emma. Between _them_ it was more the intimacy of sisters. Even<br>
+before Miss Taylor had ceased to hold the nominal office of governess,<br>
+the mildness of her temper had hardly allowed her to impose any<br>
+restraint; and the shadow of authority being now long passed away, they<br>
+had been living together as friend and friend very mutually attached,<br>
+and Emma doing just what she liked; highly esteeming Miss Taylor’s<br>
+judgment, but directed chiefly by her own.</p>
+<p>The real evils, indeed, of Emma’s situation were the power of having<br>
+rather too much her own way, and a disposition to think a little too<br>
+well of herself; these were the disadvantages which threatened alloy to<br>
+her many enjoyments. The danger, however, was at present so<br>
+unperceived, that they did not by any means rank as misfortunes with<br>
+her.</p>
+<p><img data-attachment-id="7909" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/attachment/0/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/0.png?w=676" data-orig-size="972,498" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="0" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/0.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/0.png?w=676?w=676" class="alignnone size-full wp-image-7909" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/0.png" alt="0.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/0.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/0.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/0.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/0.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/0.png 972w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p><strong><img data-attachment-id="7906" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mcausten/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=676" data-orig-size="2595,1915" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mcAusten" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=676?w=676" class="alignnone size-full wp-image-7906" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mcausten.png" alt="mcAusten.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=1352 1352w, https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/mcausten.png?w=1024 1024w" sizes="(max-width: 676px) 100vw, 676px"></strong></p>
+<p>&nbsp;</p>
+<p><strong>Author <span style="color:#ff0000;">Lewis Carroll</span> (</strong>Texts taken from<strong> Alice’s Adventures in Wonderland, Sylvie and Bruno)<br>
+</strong></p>
+<p>Alice was beginning to get very tired of sitting by her sister on the<br>
+bank, and of having nothing to do: once or twice she had peeped into the<br>
+book her sister was reading, but it had no pictures or conversations in<br>
+it, ‘and what is the use of a book,’ thought Alice ‘without pictures or<br>
+conversation?’</p>
+<p>So she was considering in her own mind (as well as she could, for the<br>
+hot day made her feel very sleepy and stupid), whether the pleasure<br>
+of making a daisy-chain would be worth the trouble of getting up and<br>
+picking the daisies, when suddenly a White Rabbit with pink eyes ran<br>
+close by her.</p>
+<p>There was nothing so VERY remarkable in that; nor did Alice think it so<br>
+VERY much out of the way to hear the Rabbit say to itself, ‘Oh dear!<br>
+Oh dear! I shall be late!’ (when she thought it over afterwards, it<br>
+occurred to her that she ought to have wondered at this, but at the time<br>
+it all seemed quite natural); but when the Rabbit actually TOOK A WATCH<br>
+OUT OF ITS WAISTCOAT-POCKET, and looked at it, and then hurried on,<br>
+Alice started to her feet, for it flashed across her mind that she had<br>
+never before seen a rabbit with either a waistcoat-pocket, or a watch<br>
+to take out of it, and burning with curiosity, she ran across the field<br>
+after it, and fortunately was just in time to see it pop down a large<br>
+rabbit-hole under the hedge.</p>
+<p>In another moment down went Alice after it, never once considering how<br>
+in the world she was to get out again.</p>
+<p>The rabbit-hole went straight on like a tunnel for some way, and then<br>
+dipped suddenly down, so suddenly that Alice had not a moment to think<br>
+about stopping herself before she found herself falling down a very deep<br>
+well.</p>
+<p><img data-attachment-id="7911" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/1-2/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/14.png?w=676" data-orig-size="967,481" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="1" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/14.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/14.png?w=676?w=676" class="alignnone size-full wp-image-7911" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/14.png" alt="1.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/14.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/14.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/14.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/14.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/14.png 967w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p><img data-attachment-id="7915" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mccarroll-3/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png" data-orig-size="2784,871" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mcCarroll" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=676" class="alignnone size-full wp-image-7915" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mccarroll2.png" alt="mcCarroll.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=1122 1122w, https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=2244 2244w, https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/mccarroll2.png?w=1024 1024w" sizes="(max-width: 1124px) 100vw, 1124px" width="1124" height="351"></p>
+<p>&nbsp;</p>
+<p><strong>Author <span style="color:#ff0000;">William Shakespeare</span> (</strong>Texts taken from<strong> Henry IV Part 1, Romeo and Juliet, Twelfth Night)</strong></p>
+<p>&nbsp;</p>
+<p>KING.<br>
+So shaken as we are, so wan with care,<br>
+Find we a time for frighted peace to pant,<br>
+And breathe short-winded accents of new broils<br>
+To be commenced in strands afar remote.<br>
+No more the thirsty entrance of this soil<br>
+Shall daub her lips with her own children’s blood;<br>
+No more shall trenching war channel her fields,<br>
+Nor bruise her flowerets with the armed hoofs<br>
+Of hostile paces: those opposed eyes,<br>
+Which, like the meteors of a troubled heaven,<br>
+All of one nature, of one substance bred,<br>
+Did lately meet in the intestine shock<br>
+And furious close of civil butchery,<br>
+Shall now, in mutual well-beseeming ranks,<br>
+March all one way, and be no more opposed<br>
+Against acquaintance, kindred, and allies:<br>
+The edge of war, like an ill-sheathed knife,<br>
+No more shall cut his master. Therefore, friends,<br>
+As far as to the sepulchre of Christ–<br>
+Whose soldier now, under whose blessed cross<br>
+We are impressed and engaged to fight–<br>
+Forthwith a power of English shall we levy,<br>
+To chase these pagans in those holy fields<br>
+Over whose acres walk’d those blessed feet<br>
+Which fourteen hundred years ago were nail’d<br>
+For our advantage on the bitter cross.<br>
+But this our purpose now is twelvemonth old,<br>
+And bootless ’tis to tell you we will go:<br>
+Therefore we meet not now.–Then let me hear<br>
+Of you, my gentle cousin Westmoreland,<br>
+What yesternight our Council did decree<br>
+In forwarding this dear expedience.</p>
+<p>WEST.<br>
+My liege, this haste was hot in question,<br>
+And many limits of the charge set down<br>
+But yesternight; when, all athwart, there came<br>
+A post from Wales loaden with heavy news;<br>
+Whose worst was, that the noble Mortimer,<br>
+Leading the men of Herefordshire to fight<br>
+Against th’ irregular and wild Glendower,<br>
+Was by the rude hands of that Welshman taken;<br>
+A thousand of his people butchered,<br>
+Upon whose dead corpse’ there was such misuse,<br>
+Such beastly, shameless transformation,<br>
+By those Welshwomen done, as may not be<br>
+Without much shame re-told or spoken of.</p>
+<p><strong>&nbsp;</strong></p>
+<p><img data-attachment-id="7913" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/shakespeare/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=676" data-orig-size="968,497" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="shakespeare" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=676?w=676" class="alignnone size-full wp-image-7913" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/shakespeare.png" alt="shakespeare.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/shakespeare.png 968w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p><img data-attachment-id="7916" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mcshakespeare/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=676" data-orig-size="1655,871" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mcShakespeare" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=676?w=676" class="alignnone size-full wp-image-7916" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mcshakespeare.png" alt="mcShakespeare.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=1352 1352w, https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/mcshakespeare.png?w=1024 1024w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p><strong>Author <span style="color:#ff0000;">MARK TWAIN</span> (</strong>Texts taken from<strong> A Connecticut Yankee in King Arthur’s Court, The Adventures of Huckleberry Finn, The Prince and the Pauper)</strong></p>
+<p>I am an American. I was born and reared in Hartford, in the State<br>
+of Connecticut–anyway, just over the river, in the country. So<br>
+I am a Yankee of the Yankees–and practical; yes, and nearly<br>
+barren of sentiment, I suppose–or poetry, in other words. My<br>
+father was a blacksmith, my uncle was a horse doctor, and I was<br>
+both, along at first. Then I went over to the great arms factory<br>
+and learned my real trade; learned all there was to it; learned<br>
+to make everything: guns, revolvers, cannon, boilers, engines, all<br>
+sorts of labor-saving machinery. Why, I could make anything<br>
+a body wanted–anything in the world, it didn’t make any difference<br>
+what; and if there wasn’t any quick new-fangled way to make a thing,<br>
+I could invent one–and do it as easy as rolling off a log. I became<br>
+head superintendent; had a couple of thousand men under me.</p>
+<p>Well, a man like that is a man that is full of fight–that goes<br>
+without saying. With a couple of thousand rough men under one,<br>
+one has plenty of that sort of amusement. I had, anyway. At last<br>
+I met my match, and I got my dose. It was during a misunderstanding<br>
+conducted with crowbars with a fellow we used to call Hercules.<br>
+He laid me out with a crusher alongside the head that made everything<br>
+crack, and seemed to spring every joint in my skull and made it<br>
+overlap its neighbor. Then the world went out in darkness, and<br>
+I didn’t feel anything more, and didn’t know anything at all<br>
+–at least for a while.</p>
+<p>When I came to again, I was sitting under an oak tree, on the<br>
+grass, with a whole beautiful and broad country landscape all<br>
+to myself–nearly. Not entirely; for there was a fellow on a horse,<br>
+looking down at me–a fellow fresh out of a picture-book. He was<br>
+in old-time iron armor from head to heel, with a helmet on his<br>
+head the shape of a nail-keg with slits in it; and he had a shield,<br>
+and a sword, and a prodigious spear; and his horse had armor on,<br>
+too, and a steel horn projecting from his forehead, and gorgeous<br>
+red and green silk trappings that hung down all around him like<br>
+a bedquilt, nearly to the ground.</p>
+<p>“Fair sir, will ye just?” said this fellow.</p>
+<p>“Will I which?”</p>
+<p>“Will ye try a passage of arms for land or lady or for–”</p>
+<p>“What are you giving me?” I said. “Get along back to your circus,<br>
+or I’ll report you.”</p>
+<p>Now what does this man do but fall back a couple of hundred yards<br>
+and then come rushing at me as hard as he could tear, with his<br>
+nail-keg bent down nearly to his horse’s neck and his long spear<br>
+pointed straight ahead. I saw he meant business, so I was up<br>
+the tree when he arrived.</p>
+<p><img data-attachment-id="7914" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/twain/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=676" data-orig-size="970,478" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="twain" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=676?w=676" class="alignnone size-full wp-image-7914" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/twain.png" alt="twain.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/twain.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/twain.png 970w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p><img data-attachment-id="7908" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/mctwain/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=676" data-orig-size="2396,1219" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="mcTwain" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=676?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=676?w=676" class="alignnone size-full wp-image-7908" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/mctwain.png" alt="mcTwain.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=676 676w, https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=1352 1352w, https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/mctwain.png?w=1024 1024w" sizes="(max-width: 676px) 100vw, 676px"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Classifying unknown texts from the Test Dataset</h2>
+<p>Each of the Markov models learnt from the training texts for each 
+author are used to compute the log-likelihood of the unknown test text, 
+the author with the maximum log-likelihood is chosen to be the likely 
+author of the text.<br>
+<strong>Unknown Text1&nbsp;</strong></p>
+<p>Against the interest of her own individual comfort, Mrs. Dashwood had<br>
+determined that it would be better for Marianne to be any where, at<br>
+that time, than at Barton, where every thing within her view would be<br>
+bringing back the past in the strongest and most afflicting manner, by<br>
+constantly placing Willoughby before her, such as she had always seen<br>
+him there. She recommended it to her daughters, therefore, by all<br>
+means not to shorten their visit to Mrs. Jennings; the length of which,<br>
+though never exactly fixed, had been expected by all to comprise at<br>
+least five or six weeks. A variety of occupations, of objects, and of<br>
+company, which could not be procured at Barton, would be inevitable<br>
+there, and might yet, she hoped, cheat Marianne, at times, into some<br>
+interest beyond herself, and even into some amusement, much as the<br>
+ideas of both might now be spurned by her.</p>
+<p>From all danger of seeing Willoughby again, her mother considered her<br>
+to be at least equally safe in town as in the country, since his<br>
+acquaintance must now be dropped by all who called themselves her<br>
+friends. Design could never bring them in each other’s way: negligence<br>
+could never leave them exposed to a surprise; and chance had less in<br>
+its favour in the crowd of London than even in the retirement of<br>
+Barton, where it might force him before her while paying that visit at<br>
+Allenham on his marriage, which Mrs. Dashwood, from foreseeing at first<br>
+as a probable event, had brought herself to expect as a certain one.</p>
+<p>She had yet another reason for wishing her children to remain where<br>
+they were; a letter from her son-in-law had told her that he and his<br>
+wife were to be in town before the middle of February, and she judged<br>
+it right that they should sometimes see their brother.</p>
+<p>Marianne had promised to be guided by her mother’s opinion, and she<br>
+submitted to it therefore without opposition, though it proved<br>
+perfectly different from what she wished and expected, though she felt<br>
+it to be entirely wrong, formed on mistaken grounds, and that by<br>
+requiring her longer continuance in London it deprived her of the only<br>
+possible alleviation of her wretchedness, the personal sympathy of her<br>
+mother, and doomed her to such society and such scenes as must prevent<br>
+her ever knowing a moment’s rest.</p>
+<p>But it was a matter of great consolation to her, that what brought evil<br>
+to herself would bring good to her sister; and Elinor, on the other<br>
+hand, suspecting that it would not be in her power to avoid Edward<br>
+entirely, comforted herself by thinking, that though their longer stay<br>
+would therefore militate against her own happiness, it would be better<br>
+for Marianne than an immediate return into Devonshire.</p>
+<p>Her carefulness in guarding her sister from ever hearing Willoughby’s<br>
+name mentioned, was not thrown away. Marianne, though without knowing<br>
+it herself, reaped all its advantage; for neither Mrs. Jennings, nor<br>
+Sir John, nor even Mrs. Palmer herself, ever spoke of him before her.<br>
+Elinor wished that the same forbearance could have extended towards<br>
+herself, but that was impossible, and she was obliged to listen day<br>
+after day to the indignation of them all.</p>
+<p><strong>log-likelihood values computed for the probable authors</strong></p>
+<p><strong>Author&nbsp;</strong> <strong>LL</strong><br>
+<span style="color:#ff0000;"><strong>0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3126.5812874</strong></span><br>
+1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4127.9155186<br>
+2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-7364.15782346<br>
+3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-9381.06336055<br>
+4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-7493.78440066<br>
+5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4837.98005673<br>
+6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3515.44028659<br>
+7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-3455.85716104</p>
+<p>As can be seen from above the maximum likelihood value corresponds to the author 0, i.e.,&nbsp;<strong>Austen</strong>.&nbsp; Hence, the most probable author of the unknown text is&nbsp;<strong>Austen</strong>.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Unknown Text2&nbsp;</strong></p>
+<p>Then he tossed the marble away pettishly, and stood cogitating. The<br>
+truth was, that a superstition of his had failed, here, which he and<br>
+all his comrades had always looked upon as infallible. If you buried a<br>
+marble with certain necessary incantations, and left it alone a<br>
+fortnight, and then opened the place with the incantation he had just<br>
+used, you would find that all the marbles you had ever lost had<br>
+gathered themselves together there, meantime, no matter how widely they<br>
+had been separated. But now, this thing had actually and unquestionably<br>
+failed. Tom’s whole structure of faith was shaken to its foundations.<br>
+He had many a time heard of this thing succeeding but never of its<br>
+failing before. It did not occur to him that he had tried it several<br>
+times before, himself, but could never find the hiding-places<br>
+afterward. He puzzled over the matter some time, and finally decided<br>
+that some witch had interfered and broken the charm. He thought he<br>
+would satisfy himself on that point; so he searched around till he<br>
+found a small sandy spot with a little funnel-shaped depression in it.<br>
+He laid himself down and put his mouth close to this depression and<br>
+called–</p>
+<p>“Doodle-bug, doodle-bug, tell me what I want to know! Doodle-bug,<br>
+doodle-bug, tell me what I want to know!”</p>
+<p>The sand began to work, and presently a small black bug appeared for a<br>
+second and then darted under again in a fright.</p>
+<p>“He dasn’t tell! So it WAS a witch that done it. I just knowed it.”</p>
+<p>He well knew the futility of trying to contend against witches, so he<br>
+gave up discouraged. But it occurred to him that he might as well have<br>
+the marble he had just thrown away, and therefore he went and made a<br>
+patient search for it. But he could not find it. Now he went back to<br>
+his treasure-house and carefully placed himself just as he had been<br>
+standing when he tossed the marble away; then he took another marble<br>
+from his pocket and tossed it in the same way, saying:</p>
+<p>“Brother, go find your brother!”</p>
+<p>He watched where it stopped, and went there and looked. But it must<br>
+have fallen short or gone too far; so he tried twice more. The last<br>
+repetition was successful. The two marbles lay within a foot of each<br>
+other.</p>
+<p><strong>log-likelihood values computed for the probable authors</strong></p>
+<p><strong>Author&nbsp;</strong> <strong>LL<br>
+</strong>0&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2779.02810424<br>
+1&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2738.09304225<br>
+2&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-5978.83684489<br>
+3&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-6551.16571407<br>
+4&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-5780.39620942<br>
+5&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-4166.34886511<br>
+6&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2309.25043697<br>
+<strong><span style="color:#ff0000;">7&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-2033.00112729</span></strong></p>
+<p><span style="color:#ff0000;"><span style="color:#000000;">As can be seen from above the <strong>maximum likelihood</strong> value corresponds to the <strong>author 7</strong>, i.e., <strong>Twain</strong>.&nbsp; Hence, the most probable author of the unknown text is <strong>Twain</strong>. The following figure shows the relevant states corresponding to the Markov model for <strong>Twain&nbsp;</strong>trained from the training dataset.</span></span><strong><span style="color:#ff0000;"><br>
+</span></strong></p>
+<p><img data-attachment-id="7924" data-permalink="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/unknown_2_mc_7/" data-orig-file="https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png" data-orig-size="5332,4075" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Unknown_2_mc_7" data-image-description="" data-medium-file="https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=300" data-large-file="https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=676" class="alignnone size-full wp-image-7924" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/unknown_2_mc_7.png" alt="Unknown_2_mc_7.png" srcset="https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=738 738w, https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=1476 1476w, https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=150 150w, https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=300 300w, https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=768 768w, https://sandipanweb.files.wordpress.com/2018/01/unknown_2_mc_7.png?w=1024 1024w" sizes="(max-width: 738px) 100vw, 738px" width="738" height="565"></p>
+<div id="atatags-370373-5c07eafe506b0">
+        <script type="text/javascript">
+            __ATA.cmd.push(function() {
+                __ATA.initVideoSlot('atatags-370373-5c07eafe506b0', {
+                    sectionId: '370373',
+                    format: 'inread'
+                });
+            });
+        </script>
+    </div>		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">		<div style="padding-bottom:15px;width:300px;height:250px;float:left;margin-right:5px;margin-top:0px">
+		<div id="atatags-26942-5c07eafe506f6">
+			<script type="text/javascript">
+			__ATA.cmd.push(function() {
+				__ATA.initSlot('atatags-26942-5c07eafe506f6',  {
+					collapseEmpty: 'before',
+					sectionId: '26942',
+					width: 300,
+					height: 250
+				});
+			});
+			</script>
+		</div></div>		<div style="padding-bottom:15px;width:300px;height:250px;float:left;margin-top:0px">
+		<div id="atatags-114160-5c07eafe506fa">
+			<script type="text/javascript">
+			__ATA.cmd.push(function() {
+				__ATA.initSlot('atatags-114160-5c07eafe506fa',  {
+					collapseEmpty: 'before',
+					sectionId: '114160',
+					width: 300,
+					height: 250
+				});
+			});
+			</script>
+		</div></div></div>
+				
+			</div>
+		</div><div id="jp-post-flair" class="sharedaddy sd-like-enabled sd-sharing-enabled"><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-7901" class="share-twitter sd-button share-icon" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-7901" class="share-facebook sd-button share-icon" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span>Facebook<span class="share-count">5</span></span></a></li><li class="share-google-plus-1"><a rel="nofollow noopener noreferrer" data-shared="sharing-google-7901" class="share-google-plus-1 sd-button share-icon" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/?share=google-plus-1&amp;nb=1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-end"></li></ul></div></div></div><div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-113312303-7901-5c07eafe5d93d" data-src="//widgets.wp.com/likes/index.html?ver=20180319#blog_id=113312303&amp;post_id=7901&amp;origin=sandipanweb.wordpress.com&amp;obj_id=113312303-7901-5c07eafe5d93d" data-name="like-post-frame-113312303-7901-5c07eafe5d93d"><h3 class="sd-title">Like this:</h3><div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;"><span class="button"><span>Like</span></span> <span class="loading">Loading...</span></div><span class="sd-text-color"></span><a class="sd-link-color"></a></div>
+<div id="jp-relatedposts" class="jp-relatedposts" style="display: block;">
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+<div class="jp-relatedposts-items jp-relatedposts-items-minimal"><p class="jp-relatedposts-post jp-relatedposts-post0" data-post-id="2375" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://sandipanweb.wordpress.com/2017/04/10/discovery-of-temporal-neighborhoods-through-discretization-methods-and-markov-model-in-c-qt/" title="Discovery of Temporal Neighborhoods through Discretization Methods and Markov Model in C++ / Qt
+
+This article describes a few approaches and algorithms for temporal neighborhood discretization from a couple of papers accepted in the conference&nbsp;ICDM (2009)&nbsp;and in&nbsp;the journal IDA (2014), authored by me and my fellow professors Dr. Aryya Gangopadhyay and Dr. Vandana Janeja at&nbsp;UMBC. Almost all&nbsp;of &nbsp;the texts / figures in this blog…" rel="nofollow" data-origin="7901" data-position="0">Discovery of Temporal Neighborhoods through Discretization Methods and Markov Model in C++ / Qt</a></span><span class="jp-relatedposts-post-context">In "C++"</span></p><p class="jp-relatedposts-post jp-relatedposts-post1" data-post-id="2334" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://sandipanweb.wordpress.com/2017/04/09/a-semi-supervised-classification-algorithm-using-markov-chain-and-random-walk-in-r/" title="A Semi-Supervised Classification Algorithm using Markov Chain and Random Walk in R
+
+Sandipan Dey,&nbsp;April 10 2017: In this article a semi-supervised classification algorithm implementation will be described using Markov Chains and Random Walks. We have the following 2D circles dataset (with 1000 points) with only 2 points labeled (as shown in the figure, colored red and blue respectively, for all others the…" rel="nofollow" data-origin="7901" data-position="1">A Semi-Supervised Classification Algorithm using Markov Chain and Random Walk in R</a></span><span class="jp-relatedposts-post-context">In "Algorithm"</span></p><p class="jp-relatedposts-post jp-relatedposts-post2" data-post-id="2072" data-post-format="false"><span class="jp-relatedposts-post-title"><a class="jp-relatedposts-post-a" href="https://sandipanweb.wordpress.com/2017/04/03/some-natural-language-processing-using-trigram-hidden-markov-models-to-tag-genes-in-biological-text/" title="Some Natural Language Processing: Using Trigram Hidden Markov Models and Viterbi Decoding to Tag Genes in Biological Text in Python
+
+This problem appeared as a programming assignment in the coursera course Natural Language Processing (NLP) by Columbia University. The following description of the problem is taken directly from the description of the assignment. In this assignment, we need to build a trigram hidden Markov model to identify gene names in…" rel="nofollow" data-origin="7901" data-position="2">Some
+ Natural Language Processing: Using Trigram Hidden Markov Models and 
+Viterbi Decoding to Tag Genes in Biological Text in Python</a></span><span class="jp-relatedposts-post-context">In "ML"</span></p></div></div></div>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+						<div class="entry-categories">
+					<a href="https://sandipanweb.wordpress.com/category/data-mining/" rel="category tag">Data Mining</a>, <a href="https://sandipanweb.wordpress.com/category/data-processing/" rel="category tag">Data Processing</a>, <a href="https://sandipanweb.wordpress.com/category/math/" rel="category tag">Math</a>, <a href="https://sandipanweb.wordpress.com/category/mathematical-modeling/" rel="category tag">Mathematical Modeling</a>, <a href="https://sandipanweb.wordpress.com/category/python/" rel="category tag">Python</a>, <a href="https://sandipanweb.wordpress.com/category/text-mining/" rel="category tag">Text Mining</a>				</div>
+						</footer><!-- .entry-meta -->
+</article><!-- #post-## -->
+
+				<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+		<div class="nav-links">
+			<div class="nav-previous"><a href="https://sandipanweb.wordpress.com/2018/01/07/classifying-a-face-image-as-happy-unhappy-and-face-recognition-using-deep-learning-convolution-neural-net-with-keras-in-python/" rel="prev"><span class="meta-nav">←</span> Classifying a Face as Happy/Unhappy and Face Recognition using a Pre-trained Deep Inception Network with Keras in&nbsp;Python</a></div><div class="nav-next"><a href="https://sandipanweb.wordpress.com/2018/01/20/hand-gesture-classification-using-deep-convolution-and-residual-neural-network-with-tensorflow-keras-in-python/" rel="next">Hand-Gesture
+ Classification using Deep Convolution and Residual Neural Network 
+(ResNet-50) with Tensorflow / Keras in&nbsp;Python <span class="meta-nav">→</span></a></div>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+			
+<div id="comments" class="comments-area">
+
+	
+			<h2 class="comments-title">
+			One thought on “<span>Some Applications of Markov Chain in&nbsp;Python</span>”		</h2>
+
+		
+		<ol class="comment-list">
+				<li class="post pingback">
+		<p>Pingback: <a href="http://adrian-tudor.com/blog/sandipan-dey-some-applications-of-markov-chain-in-python/" rel="external nofollow" class="url">Sandipan Dey: Some Applications of Markov Chain in Python | Adrian Tudor Web Designer and Programmer</a></p>
+	</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond js">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://sandipanweb.wordpress.com/2018/01/12/some-applications-of-markov-chain/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://sandipanweb.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
+				<input type="hidden" id="highlander_comment_nonce" name="highlander_comment_nonce" value="2a4b730abd"><input type="hidden" name="_wp_http_referer" value="/2018/01/12/some-applications-of-markov-chain/">
+<input type="hidden" name="hc_post_as" id="hc_post_as" value="guest">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px none; padding: 0px; box-sizing: content-box; overflow-wrap: break-word; height: 0px !important; min-height: 0px !important; overflow: hidden; transition: none 0s ease 0s; font-family: Arial, Helvetica, Tahoma, Verdana, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; text-decoration: none; word-spacing: 0px; text-indent: 0px; line-height: 23.8px; width: 654px;" class="autosizejs ">Enter your comment here...</textarea><textarea id="comment" name="comment" title="Enter your comment here..." placeholder="Enter your comment here..." style="height: 125px; overflow: hidden; overflow-wrap: break-word; resize: none;"></textarea></div>
+</div>
+
+<div id="comment-form-identity" style="display: none;">
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" class="nascar-signin-link" title="Login via Guest">
+									</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" class="nascar-signin-link" title="Login via WordPress.com">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"></path></g></svg>				</a>
+			</li>
+			<li>
+			<iframe id="googleplus-sign-in" name="googleplus-sign-in" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a.html" scrolling="no" allowtransparency="true" seamless="seamless" width="24" height="24" frameborder="0"></iframe>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" class="nascar-signin-link" title="Login via Twitter">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"></path></g></svg>				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" class="nascar-signin-link" title="Login via Facebook">
+					<svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"></path></g></svg>				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="url"></div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad516503a11cd5ca435acc9bb6523536.png" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="">
+				<input type="hidden" name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="">
+						<p class="comment-form-posting-as pa-wordpress">
+			<strong></strong>
+			You are commenting using your WordPress.com account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'wordpress' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#0087be" d="M12.158 12.786l-2.698 7.84c.806.236 1.657.365 2.54.365 1.047 0 2.05-.18 2.986-.51-.024-.037-.046-.078-.065-.123l-2.762-7.57zM3.008 12c0 3.56 2.07 6.634 5.068 8.092L3.788 8.342c-.5 1.117-.78 2.354-.78 3.658zm15.06-.454c0-1.112-.398-1.88-.74-2.48-.456-.74-.883-1.368-.883-2.11 0-.825.627-1.595 1.51-1.595.04 0 .078.006.116.008-1.598-1.464-3.73-2.36-6.07-2.36-3.14 0-5.904 1.613-7.512 4.053.21.008.41.012.58.012.94 0 2.395-.114 2.395-.114.484-.028.54.684.057.74 0 0-.487.058-1.03.086l3.275 9.74 1.968-5.902-1.4-3.838c-.485-.028-.944-.085-.944-.085-.486-.03-.43-.77.056-.742 0 0 1.484.114 2.368.114.94 0 2.397-.114 2.397-.114.486-.028.543.684.058.74 0 0-.488.058-1.03.086l3.25 9.665.897-2.997c.456-1.17.684-2.137.684-2.907zm1.82-3.86c.04.286.06.593.06.924 0 .912-.17 1.938-.683 3.22l-2.746 7.94c2.672-1.558 4.47-4.454 4.47-7.77 0-1.564-.4-3.033-1.1-4.314zM12 22C6.486 22 2 17.514 2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"></path></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-googleplus" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Google+ photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="googleplus_avatar" id="googleplus-avatar" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_user_id" id="googleplus-user_id" class="comment-meta-googleplus" value="">
+				<input type="hidden" name="googleplus_access_token" id="googleplus-access_token" class="comment-meta-googleplus" value="">
+						<p class="comment-form-posting-as pa-googleplus">
+			<strong></strong>
+			You are commenting using your Google+ account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'googleplus' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" x="0px" y="0px" viewBox="0 0 60 60"><path fill="#519bf7" d="M56.3,30c0,-1.6 -0.2,-3.4 -0.6,-5h-3.1H42.2H30v10.6h14.8C44,39.3 42,42 39.1,43.9l8.8,6.8C53,46 56.3,39 56.3,30z"></path><path fill="#3db366" d="M30,57.5c6.7,0 13.1,-2.4 17.9,-6.8l-8.8,-6.8c-2.5,1.6 -5.6,2.4 -9.1,2.4c-7.2,0 -13.3,-4.7 -15.4,-11.2l-9.3,7.1C9.8,51.3 19.1,57.5 30,57.5z"></path><path fill="#fdc600" d="M5.3,42.2l9.3,-7.1c-0.5,-1.6 -0.8,-3.3 -0.8,-5.1s0.3,-3.5 0.8,-5.1l-9.3,-7.1C3.5,21.5 2.5,25.6 2.5,30S3.5,38.5 5.3,42.2z"></path><path fill="#f15b44" d="M40.1,17.4l8,-8C43.3,5.1 37,2.5 30,2.5C19.1,2.5 9.8,8.7 5.3,17.8l9.3,7.1c2.1,-6.5 8.2,-11.1 15.4,-11.1C33.9,13.7 37.4,15.1 40.1,17.4z"></path></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="">
+				<input type="hidden" name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="">
+						<p class="comment-form-posting-as pa-twitter">
+			<strong></strong>
+			You are commenting using your Twitter account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'twitter' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#1DA1F2" d="M22.23 5.924c-.736.326-1.527.547-2.357.646.847-.508 1.498-1.312 1.804-2.27-.793.47-1.67.812-2.606.996C18.325 4.498 17.258 4 16.078 4c-2.266 0-4.103 1.837-4.103 4.103 0 .322.036.635.106.935-3.41-.17-6.433-1.804-8.457-4.287-.353.607-.556 1.312-.556 2.064 0 1.424.724 2.68 1.825 3.415-.673-.022-1.305-.207-1.86-.514v.052c0 1.988 1.415 3.647 3.293 4.023-.344.095-.707.145-1.08.145-.265 0-.522-.026-.773-.074.522 1.63 2.038 2.817 3.833 2.85-1.404 1.1-3.174 1.757-5.096 1.757-.332 0-.66-.02-.98-.057 1.816 1.164 3.973 1.843 6.29 1.843 7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53.802-.578 1.497-1.3 2.047-2.124z"></path></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/ad516503a11cd5ca435acc9bb6523536.png" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input type="hidden" name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="">
+				<input type="hidden" name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="">
+						<p class="comment-form-posting-as pa-facebook">
+			<strong></strong>
+			You are commenting using your Facebook account.			<span class="comment-form-log-out">
+				(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout( 'facebook' );">Log&nbsp;Out</a>&nbsp;/&nbsp;
+				<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)
+			</span>
+			<span class="pa-icon"><svg xmlns="http://www.w3.org/2000/svg" role="presentation" viewBox="0 0 24 24"><rect x="0" fill="none" width="24" height="24"></rect><g><path fill="#3B5998" d="M20.007 3H3.993C3.445 3 3 3.445 3 3.993v16.013c0 .55.445.994.993.994h8.62v-6.97H10.27V11.31h2.346V9.31c0-2.325 1.42-3.59 3.494-3.59.993 0 1.847.073 2.096.106v2.43h-1.438c-1.128 0-1.346.537-1.346 1.324v1.734h2.69l-.35 2.717h-2.34V21h4.587c.548 0 .993-.445.993-.993V3.993c0-.548-.445-.993-.993-.993z"></path></g></svg></span>
+		</p>
+					</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+
+</div>
+
+<script type="text/javascript">
+var highlander_expando_javascript = function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+}
+jQuery(document).ready( highlander_expando_javascript );
+</script>
+
+<div id="comment-form-subscribe" style="display: none;">
+	<p class="comment-subscription-form"><input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of new comments via email.</label></p></div>
+
+
+
+
+<p class="form-submit" style="display: none;"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="7901" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="1fd8d1de86"></p>
+<input type="hidden" name="genseq" value="1544022782">
+<p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1544022817842"></form>
+			</div><!-- #respond -->
+	<div style="clear: both"></div>
+</div><!-- #comments -->
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	<div id="secondary" class="widget-area" role="complementary">
+		<aside id="search-1" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://sandipanweb.wordpress.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></aside><aside id="text-5" class="widget widget_text"><h1 class="widget-title">copyright</h1>			<div class="textwidget">Copyright © 2016-2018 by Sandipan Dey,
+ 
+    MS (CSEE), UMBC</div>
+		</aside>		<div class="wpcnt">
+			<div class="wpa wpmrec">
+				<span class="wpa-about">Advertisements</span>
+				<div class="u">
+							<div style="padding-bottom:15px;width:300px;height:250px;">
+		<div id="atatags-286348-5c07eafe60629">
+			<script type="text/javascript">
+			__ATA.cmd.push(function() {
+				__ATA.initSlot('atatags-286348-5c07eafe60629',  {
+					collapseEmpty: 'before',
+					sectionId: '286348',
+					width: 300,
+					height: 250
+				});
+			});
+			</script>
+		</div></div>
+				</div>
+				
+			</div>
+		</div>	</div><!-- #secondary -->
+
+	</div><!-- #content -->
+	<footer id="colophon" class="site-footer" role="contentinfo">
+			<div id="tertiary" class="widget-areas clear" role="complementary">
+					<div class="widget-area">
+				<aside id="archives-1" class="widget widget_archive"><h1 class="widget-title">Archive</h1>		<ul>
+				<li><a href="https://sandipanweb.wordpress.com/2018/10/">October 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/07/">July 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/06/">June 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/05/">May 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/04/">April 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/03/">March 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/02/">February 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2018/01/">January 2018</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/12/">December 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/11/">November 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/10/">October 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/09/">September 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/08/">August 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/07/">July 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/06/">June 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/05/">May 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/04/">April 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/03/">March 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/02/">February 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2017/01/">January 2017</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/12/">December 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/11/">November 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/10/">October 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/09/">September 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/08/">August 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/07/">July 2016</a></li>
+	<li><a href="https://sandipanweb.wordpress.com/2016/06/">June 2016</a></li>
+		</ul>
+			</aside>			</div>
+							<div class="widget-area">
+				<aside id="nav_menu-1" class="widget widget_nav_menu"><h1 class="widget-title">Navigation</h1><div class="menu-primary-container"><ul id="menu-primary" class="menu"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8"><a href="https://sandipanweb.wordpress.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9"><a href="https://sandipanweb.wordpress.com/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="https://sandipanweb.wordpress.com/contact/">Contact</a></li>
+</ul></div></aside>			</div>
+							<div class="widget-area">
+				<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://sandipanweb.wordpress.com/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search …" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></aside>			</div>
+			</div><!-- #tertiary -->
+		<div class="site-info">
+			<a href="https://wordpress.com/?ref=footer_custom_powered">Powered by WordPress.com</a>.
+			
+					</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!--  -->
+<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/wpgroho.js"></script>
+
+	<script>
+		//initialize and attach hovercards to all gravatars
+		jQuery( document ).ready( function( $ ) {
+
+			if (typeof Gravatar === "undefined"){
+				return;
+			}
+
+			if ( typeof Gravatar.init !== "function" ) {
+				return;
+			}			
+
+			Gravatar.profile_cb = function( hash, id ) {
+				WPGroHo.syncProfileData( hash, id );
+			};
+			Gravatar.my_hash = WPGroHo.my_hash;
+			Gravatar.init( 'body', '#wp-admin-bar-my-account' );
+		});
+	</script>
+
+		<div style="display:none">
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"https:\/\/sandipanweb.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"https:\/\/sandipanweb.wordpress.com\/wp-login.php?action=logout&_wpnonce=00223789ae","homeURL":"https:\/\/sandipanweb.wordpress.com\/","postID":"7901","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"","text_direction":"ltr"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a.js"></script>
+
+	<div id="carousel-reblog-box">
+		<form action="#" name="carousel-reblog">
+			<textarea id="carousel-reblog-content" name="carousel-reblog-content" placeholder="Add your thoughts here... (optional)"></textarea>
+			<label for="carousel-reblog-to-blog-id" id="carousel-reblog-lblogid">Post to</label>
+			<select name="carousel-reblog-to-blog-id" id="carousel-reblog-to-blog-id">
+						</select>
+
+			<div class="submit">
+				<span class="canceltext"><a href="#" class="cancel">Cancel</a></span>
+				<input type="submit" name="carousel-reblog-submit" class="button" id="carousel-reblog-submit" value="Reblog Post">
+				<input type="hidden" id="carousel-reblog-blog-id" value="113312303">
+				<input type="hidden" id="carousel-reblog-blog-url" value="https://sandipanweb.wordpress.com">
+				<input type="hidden" id="carousel-reblog-blog-title" value="sandipanweb">
+				<input type="hidden" id="carousel-reblog-post-url" value="">
+				<input type="hidden" id="carousel-reblog-post-title" value="">
+			</div>
+
+			<input type="hidden" id="_wpnonce" name="_wpnonce" value="0d1fc69115"><input type="hidden" name="_wp_http_referer" value="/2018/01/12/some-applications-of-markov-chain/">		</form>
+
+		<div class="arrow"></div>
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/sandipanweb.wordpress.com\/2018\/01\/12\/some-applications-of-markov-chain\/":7901};
+	</script>
+				<link rel="stylesheet" id="all-css-0-3" href="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/jetpack-carousel.css" type="text/css" media="all">
+<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?m=1412618825h&#038;ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var comment_like_text = {"loading":"Loading..."};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var actionbardata = {"siteID":"113312303","siteName":"sandipanweb","siteURL":"http:\/\/sandipanweb.wordpress.com","icon":"<img alt='' src='https:\/\/sandipanweb.files.wordpress.com\/2017\/08\/00535b8.jpg?w=50' class='avatar avatar-50' height='50' width='50' \/>","canManageOptions":"","canCustomizeSite":"","isFollowing":"","themeSlug":"pub\/hemingway-rewritten","signupURL":"https:\/\/wordpress.com\/start\/","loginURL":"https:\/\/sandipanweb.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F","themeURL":"https:\/\/wordpress.com\/theme\/hemingway-rewritten\/","xhrURL":"https:\/\/sandipanweb.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"9d0776a212","isSingular":"1","isFolded":"","isLoggedIn":"","isMobile":"","subscribeNonce":"<input type=\"hidden\" id=\"_wpnonce\" name=\"_wpnonce\" value=\"6c81627274\" \/>","referer":"https:\/\/sandipanweb.wordpress.com\/2018\/01\/12\/some-applications-of-markov-chain\/","canFollow":"1","feedID":"50203585","statusMessage":"","customizeLink":"https:\/\/sandipanweb.wordpress.com\/wp-admin\/customize.php?url=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F","postID":"7901","shortlink":"https:\/\/wp.me\/p7FrHN-23r","canEditPost":"","editLink":"https:\/\/wordpress.com\/post\/sandipanweb.wordpress.com\/7901","statsLink":"https:\/\/wordpress.com\/stats\/post\/7901\/sandipanweb.wordpress.com","i18n":{"view":"View site","follow":"Follow","following":"Following","edit":"Edit","login":"Log in","signup":"Sign up","customize":"Customize","report":"Report this content","themeInfo":"Get theme: Hemingway Rewritten","shortlink":"Copy shortlink","copied":"Copied","followedText":"New posts from this site will now appear in your <a href=\"https:\/\/wordpress.com\/\">Reader<\/a>","foldBar":"Collapse this bar","unfoldBar":"Expand this bar","editSubs":"Manage subscriptions","viewReader":"View site in Reader","viewReadPost":"View post in Reader","subscribe":"Sign me up","enterEmail":"Enter your email address","followers":"Join 62 other followers","alreadyUser":"Already have a WordPress.com account? <a href=\"https:\/\/sandipanweb.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F\">Log in now.<\/a>","stats":"Stats"}};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/sandipanweb.wordpress.com\/wp-admin\/admin-ajax.php","nonce":"aca31c4c37","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/sandipanweb.wordpress.com\/wp-login.php?redirect_to=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F","blog_id":"113312303","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>","reblog":"Reblog","reblogged":"Reblogged","reblog_add_thoughts":"Add your thoughts here... (optional)","reblogging":"Reblogging...","post_reblog":"Post Reblog","stats_query_args":"blog=113312303&v=wpcom&tz=0&user_id=0&subd=sandipanweb","is_public":"1","reblog_enabled":""};
+/* ]]> */
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/a_003.js"></script><div class="widget widget_eu_cookie_law_widget" style="display: block;"><div class="hide-on-button ads-active" data-hide-timeout="30" data-consent-expiration="180" id="eu-cookie-law">
+	<form method="post">
+		<input type="submit" value="Close and accept" class="accept">
+
+		Privacy &amp; Cookies: This site uses cookies. By continuing to use this website, you agree to their use. <br>
+To find out more, including how to control cookies, see here:
+		<a href="https://automattic.com/cookies">
+			Cookie Policy		</a>
+ </form>
+</div>
+</div><div id="actionbar" class="actnbr-pub-hemingway-rewritten actnbr-has-follow actnbr-hidden"><ul><li class="actnbr-btn actnbr-hidden"> 			    	<a class="actnbr-action actnbr-actn-follow" href=""><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a> 			    	<div class="actnbr-popover tip tip-top-left actnbr-notice"> 			    		<div class="tip-arrow"></div> 			    		<div class="tip-inner actnbr-follow-bubble"></div> 			    	</div> 			    </li><li class="actnbr-ellipsis actnbr-hidden"> 			  <svg class="gridicon gridicon__ellipsis" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle></g></svg> 			  <div class="actnbr-popover tip tip-top-left actnbr-more"> 			  	<div class="tip-arrow"></div> 			  	<div class="tip-inner"> 				  <ul> 				    <li class="actnbr-sitename actnbr-hidden"><a href="http://sandipanweb.wordpress.com/"><img alt="" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/00535b8.jpg" class="avatar avatar-50" width="50" height="50"> sandipanweb</a></li> 				   	<li class="actnbr-folded-customize actnbr-hidden"><a href="https://sandipanweb.wordpress.com/wp-admin/customize.php?url=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F"><svg class="gridicon gridicon__customize" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M2 6c0-1.505.78-3.08 2-4 0 .845.69 2 2 2 1.657 0 3 1.343 3 3 0 .386-.08.752-.212 1.09.74.594 1.476 1.19 2.19 1.81L8.9 11.98c-.62-.716-1.214-1.454-1.807-2.192C6.753 9.92 6.387 10 6 10c-2.21 0-4-1.79-4-4zm12.152 6.848l1.34-1.34c.607.304 1.283.492 2.008.492 2.485 0 4.5-2.015 4.5-4.5 0-.725-.188-1.4-.493-2.007L18 9l-2-2 3.507-3.507C18.9 3.188 18.225 3 17.5 3 15.015 3 13 5.015 13 7.5c0 .725.188 1.4.493 2.007L3 20l2 2 6.848-6.848c1.885 1.928 3.874 3.753 5.977 5.45l1.425 1.148 1.5-1.5-1.15-1.425c-1.695-2.103-3.52-4.092-5.448-5.977z" data-reactid=".2.1.1:0.1b.0"></path></g></svg><span>Customize<span></span></span></a></li> 				    <li class="actnbr-folded-follow actnbr-hidden"><a class="actnbr-action actnbr-actn-follow" href=""><svg class="gridicon gridicon__follow" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M23 16v2h-3v3h-2v-3h-3v-2h3v-3h2v3h3zM20 2v9h-4v3h-3v4H4c-1.1 0-2-.9-2-2V2h18zM8 13v-1H4v1h4zm3-3H4v1h7v-1zm0-2H4v1h7V8zm7-4H4v2h14V4z"></path></g></svg><span>Follow</span></a></li> 					<li class="actnbr-signup actnbr-hidden"><a href="https://wordpress.com/start/">Sign up</a></li> 				    <li class="actnbr-login actnbr-hidden"><a href="https://sandipanweb.wordpress.com/wp-login.php?redirect_to=https%3A%2F%2Fsandipanweb.wordpress.com%2F2018%2F01%2F12%2Fsome-applications-of-markov-chain%2F">Log in</a></li> 				     				    <li class="actnbr-shortlink actnbr-hidden"><a href="https://wp.me/p7FrHN-23r">Copy shortlink</a></li> 				    <li class="flb-report actnbr-hidden"><a href="http://en.wordpress.com/abuse/">Report this content</a></li> 				     				     				    <li class="actnbr-subs actnbr-hidden"><a href="https://subscribe.wordpress.com/">Manage subscriptions</a></li> 				    <li class="actnbr-fold actnbr-hidden"><a href="">Collapse this bar</a></li> 			      </ul> 			    </div> 		      </div> 		    </li> 	      </ul></div>
+<script type="text/javascript">
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+</script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script>	<script type="text/javascript">
+	var skimlinks_pub_id = "725X584219"
+	var skimlinks_sitename = "sandipanweb.wordpress.com";
+	</script>
+	<script type="text/javascript" defer="defer" src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/725X1342.js"></script>		<iframe src="https://widgets.wp.com/likes/master.html?ver=20180319#ver=20180319" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe>
+		<div id="likes-other-gravatars"><div class="likes-text"><span>%d</span> bloggers like this:</div><ul class="wpl-avatars sd-like-gravatars"></ul></div>
+<script src="Some%20Applications%20of%20Markov%20Chain%20in%20Python%20%20%20sandipanweb_files/w.js" type="text/javascript" async="" defer="defer"></script>
+<script type="text/javascript">
+_tkq = window._tkq || [];
+_stq = window._stq || [];
+_tkq.push(['storeContext', {'blog_id':'113312303','blog_tz':'0','user_lang':'en','blog_lang':'en','user_id':'0'}]);
+_stq.push(['view', {'blog':'113312303','v':'wpcom','tz':'0','user_id':'0','post':'7901','subd':'sandipanweb'}]);
+_stq.push(['extra', {'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3AwazN0Jl9aRTBjRmFSQlF6OE9yUD9ENWJ5bWJYWCZxNF9NeFJXd3ViMXhfUFFKZUdnZj1aNzNDNEVqL3F2WmU0alVVdktXcHNUNyxRSEtdM0w5R0M9VHo1U1JNYV9OfisudHMvN35obUhFd1JmRUJvNHpad1FOU21ENiVHVG4yaHZtT1QmQm92aTZNZHZ4V2hVT183T2lOUn5wOEtqX0Ztbl9CQzEmUS42T3VbNXxsMD01XXhWWDdwLStRa21bJjF+L0kxZWEwS2Y0WStmdFJsTi4udVA0clpnWWMmOX5qMHkzYThKRG5Ndy9SVk5qVlc='}]);
+_stq.push([ 'clickTrackerInit', '113312303', '7901' ]);
+	</script>
+<noscript><img src="https://pixel.wp.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+<script>
+if ( 'object' === typeof wpcom_mobile_user_agent_info ) {
+
+	wpcom_mobile_user_agent_info.init();
+	var mobileStatsQueryString = "";
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedPlatformName )
+		mobileStatsQueryString += "&x_" + 'mobile_platforms' + '=' + wpcom_mobile_user_agent_info.matchedPlatformName;
+	
+	if( false !== wpcom_mobile_user_agent_info.matchedUserAgentName )
+		mobileStatsQueryString += "&x_" + 'mobile_devices' + '=' + wpcom_mobile_user_agent_info.matchedUserAgentName;
+	
+	if( wpcom_mobile_user_agent_info.isIPad() )
+		mobileStatsQueryString += "&x_" + 'ipad_views' + '=' + 'views';
+
+	if( "" != mobileStatsQueryString ) {
+		new Image().src = document.location.protocol + '//pixel.wp.com/g.gif?v=wpcom-no-pv' + mobileStatsQueryString + '&baba=' + Math.random();
+	}
+	
+}
+</script>
+
+
+<div class="comment-likes-overlay" style="display: none;"></div></body></html>

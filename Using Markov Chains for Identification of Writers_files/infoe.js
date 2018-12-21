@@ -1,0 +1,3 @@
+document.write('<div align="center"><table border="0" width="100%"><tr><td width="50%"><p align="left" class=menu>Created and supported by <a href="mailto:polikarp@philol.msu.ru">Anatoliy A. Polikarpov</a><br><a href="mailto:a_varl@philol.msu.ru?subject=from lexigraph">Webmaster</a></P></td><td width="50%">');
+var dateMod = ""  ;dateMod = document.lastModified  ;document.write("<p class=menu align=right>Last updated:  ");  document.write(dateMod);  document.write('</p>');
+document.write('</td></tr></table></div>');

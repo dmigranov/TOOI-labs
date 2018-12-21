@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+<title> Using Markov Chains for Identification of Writers</title>
+<link rel="stylesheet" type="text/css" href="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/lokll.css">
+</head>
+<body>
+<script type="text/javascript" async="" src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/watch.js"></script><script src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/head_e.js" type="text/javascript"></script><center><a href="http://www.philol.msu.ru/~lex/index_e.html"><img src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/logo_sme.gif" alt="MSU - Laboratory for General and Computational Lexicology and Lexicography" border="0"></a></center><p align="center"><b><a name="top"></a>Lomonosov Moscow State University<br><br>Faculty of Philology</b></p><center><img src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/line.gif" width="680" height="4" border="0"></center><blockquote> 
+<h1 align="center">Using Markov Chains for Identification of Writers </h1>
+  
+<p>
+
+</p><h3 align="center">Dmitri V. Khmelev and Fiona J. Tweedie </h3>
+
+
+<p>
+
+</p><center>  This paper was published in Literary and Linguistic Computing, 2001,
+  vol.16, no.4, pp.299-307
+</center>
+
+<p>
+
+</p><h2> Abstract</h2>
+  In this paper we present a technique for authorship attribution
+  based on a simple Markov chain of letters (i.e., just letter bigrams
+  are used). Many proposed methods of authorship attribution are
+  illustrated on small examples. We show that this technique provides
+  excellent results when applied to over 380 texts from the Project
+  Gutenberg archives, as well as to two previously published data
+  sets.
+<p>
+
+</p><p>
+
+</p><h1>Contents </h1><a href="#tth_sEc1">1&nbsp; Introduction</a><br>
+<a href="#tth_sEc2">2&nbsp; Method</a><br>
+<a href="#tth_sEc3">3&nbsp; Application</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1">3.1&nbsp; Project Gutenberg</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.2">3.2&nbsp; Outside the Cave of Shadows</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3">3.3&nbsp; Federalist Papers</a><br>
+<a href="#tth_sEc4">4&nbsp; Discussion and Conclusions</a><br>
+<a href="#tth_sEcA">A&nbsp; Mathematical Background</a><br>
+<a href="#tth_sEcB">B&nbsp; Results from Project Gutenberg texts</a><br>
+ 
+<p>
+        </p><h2><a name="tth_sEc1">
+1</a>&nbsp;&nbsp;Introduction</h2>
+Modern methods of authorship attribution are reviewed for Russian
+techniques by Milov (1994) and for Western methods by Holmes
+(1998). Despite the huge variety of
+methods, none of those described in either paper have been applied to
+a large number of texts. Often such methods require an element of
+human intervention which makes their application to large numbers of
+texts almost impossible. Yet the generalisability of these techniques
+is of prime importance - can they be used outside the particular
+case that they were designed for?
+
+<p>
+One method which has been tested on a number of texts was proposed by
+Fomenko and Fomenko (1996). They examine the proportion of function
+words used by an author, and find that this is stable for each author,
+across a large number of writers in Russian.
+
+</p><p>
+In this paper we present a method which has its origins in the early
+twentieth century in the work of Markov (1916). In criticising the
+work of Morozov (1915), he recalls a technique used to examine the
+text of <em>Eugene Onegin </em> in 1913.
+ In Markov's paper we find the
+first application of the idea of the <em>Markov Chain </em>, used in
+many fields today, e.g. speech recognition. We consider a
+straightforward measure, i.e. the letters that are used in the text.
+Unlike recent work involving letters by, for example Kjell (1994) and
+Forsyth and Holmes (1996), we consider not the relative frequency of a
+letter bigram, but rather the probabilities of the subsequent letter,
+e.g.  given that a particular letter is an `f' which letters are most
+likely to follow it?
+
+</p><p>
+In the following section we describe the method in detail. Subsequent
+sections put the idea in to practice with a large selection of texts
+from the Project Gutenberg archives, data from Baayen et al.&nbsp;(1996)'s
+investigation of the use of syntactic information, and from The <em>
+  Federalist Papers </em>. We finish with the conclusions drawn from
+these examples.
+
+</p><p>
+        </p><h2><a name="tth_sEc2">
+2</a>&nbsp;&nbsp;Method</h2>
+
+<p>
+If we wanted to find a probabilistic model for natural language text,
+we might consider a simple model where letters and spaces were
+generated independently according to their probabilities of occurrence
+in the language. Of course, letters do not occur at random, and are
+dependent on the letters which occur before them. The simplest such
+model would have each letter being dependent only on the preceding
+letter. This gives rise to a first-order, or simple, Markov chain
+model. We will show that this model can be used to determine authorship
+in a wide variety of examples.
+
+</p><p>
+As an example of a first-order Markov chain, we can consider a
+sequence of a reduced number of letters, for example a section of DNA.
+The section below is taken from the start of the X-chromosome.
+
+</p><p>
+
+</p><pre>GATCATTGATATGTTGCTAGAACTATGAGTGTTAAAGGTGCTTGTGGTGAGTTATCAGAC
+AGAAACGCAGAAGATGTTATTGGAAGCTTGAGGAAAAGTGATCCTGGATTTACAGTGCCA
+AGAATTGGCCTGTATTGTGTTCTCAATGTTTTTGAGGAAGGTAGAAACTGTAAGTGATGA
+</pre>
+
+<p>
+In this case we have four possible characters, A, C, G and T. If we
+count the number of times in this section of DNA that A occurs, we
+find that of the 53 occurrences, A is followed by another A 17 times,
+or 32.1% of the time, while a C follows only 5 times (9.4%), a G, 17
+times (32.1%) and a T 14 times or 26.4%. We can then construct a
+full <em>transition matrix</em>:
+
+</p><p>
+
+</p><center>
+<table>
+<tbody><tr><td></td><td align="right"></td><td colspan="4" align="center">Second char</td></tr>
+<tr><td></td><td align="right"></td><td align="right">A</td><td align="right">C</td><td align="right">G</td><td align="right">T</td></tr>
+<tr><td></td><td align="right">A </td><td align="right">17  </td><td align="right">5  </td><td align="right">17  </td><td align="right">14 </td></tr>
+<tr><td>First</td><td align="right">C </td><td align="right">7  </td><td align="right">3  </td><td align="right">1  </td><td align="right">8 </td></tr>
+<tr><td>char</td><td align="right">G </td><td align="right">20  </td><td align="right">6  </td><td align="right">8  </td><td align="right">17 </td></tr>
+<tr><td></td><td align="right">T </td><td align="right">10  </td><td align="right">5  </td><td align="right">24  </td><td align="right">17 </td></tr></tbody></table>
+</center>
+
+<p>
+This can be turned into a matrix of probabilities by dividing each
+number by the total for that row, e.g. for A followed by another A we
+have 17/(17+5+17+14) = 0.320755:
+
+</p><p>
+
+</p><center>
+<table>
+<tbody><tr><td></td><td align="right"></td><td colspan="4" align="center">Second char</td></tr>
+<tr><td></td><td align="right"></td><td colspan="1" align="center">A</td><td colspan="1" align="center">C</td><td colspan="1" align="center">G</td><td colspan="1" align="center">T</td></tr>
+<tr><td></td><td align="right">A </td><td align="right">0.320755  </td><td align="right">0.094340  </td><td align="right">0.320755  </td><td align="right">0.264151 </td></tr>
+<tr><td>First</td><td align="right">C </td><td align="right">0.368421  </td><td align="right">0.157895  </td><td align="right">0.052632  </td><td align="right">0.421053 </td></tr>
+<tr><td>char</td><td align="right">G </td><td align="right">0.392157  </td><td align="right">0.117647  </td><td align="right">0.156863  </td><td align="right">0.333333 </td></tr>
+<tr><td></td><td align="right">T </td><td align="right">0.178571  </td><td align="right">0.089286  </td><td align="right">0.428571  </td><td align="right">0.303571 </td></tr></tbody></table>
+</center>
+
+<p>
+While in studies of DNA the alphabet consists of 4 characters, with
+texts in English we have 26 characters, plus the space character, to deal
+with. The theory remains the same, with a 27&#215;27 transition matrix
+replacing the 4&#215;4 one illustrated above.
+
+</p><p>
+Some pre-processing of the texts is carried out before the transition
+matrices are calculated. All punctuation and formatting are removed.
+Khmelev (2000) shows that better results are obtained when capitalised
+words such as proper nouns and sentence-initial words are ignored and
+so words beginning with a capital letter are also omitted. Formatting
+is reduced to a single space between words, and also at the beginning
+and end of the text. A mathematical description of the technique can
+be found in Appendix <a href="#app:math">A</a> while the main text will describe
+it in general terms.
+
+</p><p>
+A transition matrix, comparable to the one above, although much
+larger, is then calculated for each text. The transition matrix for an
+author is produced by averaging the elements of the matrices from each
+text by that author.
+
+</p><p>
+In order to predict the authorship of a new text, assuming that it was
+written by one of the known authors, we consider the probability of
+the text being generated by each of the transition matrices. Each
+author will thus be assigned a probability. These probabilities are
+then ranked, with the highest probability having rank 0, the next rank
+1 and so on, and the author with the highest probability and thus
+lowest rank is deemed to have written the text.
+
+</p><p>
+Khmelev (2000) presents this technique and applies it to authors writing in
+Russian. He shows that it gives substantially
+better results than the analysis of individual letters.  In the
+present paper we apply the method to English texts including two
+published data sets.
+
+</p><p>
+        </p><h2><a name="tth_sEc3">
+3</a>&nbsp;&nbsp;Application</h2>
+
+<p>
+We will consider three data sets to illustrate the technique described above:
+
+</p><ol type="1">
+
+<li> Authors of texts in English, obtained from the Project Gutenberg
+  archives,<a href="#tthFtNtAAB" name="tthFrefAAB"><sup>1</sup></a> 
+
+</li><li> Data from the Baayen et al.&nbsp;(1996) paper: `Outside the Cave of Shadows',
+
+</li><li> The <em>Federalist Papers</em>.
+</li></ol>
+<p>
+Each section will present the problem, describe the division into
+training and test sets, indicate the levels of cross-validation
+accuracy, and present and discuss the results.
+
+</p><p>
+      </p><h3><a name="tth_sEc3.1">
+3.1</a>&nbsp;&nbsp;Project Gutenberg</h3>
+In order to consider as wide a variety of writers in English as
+possible, texts were obtained from the Project Gutenberg archives. A
+total of 387 texts were obtained from 45 authors who had more than one
+text included in the archive; the details of authors and
+classifications are given in Appendix <a href="#app:1">B</a>. One randomly chosen
+text from each author was held out to make up an initial test set. The
+results from comparing these texts with the 45 authors are given in
+the first two columns of Table <a href="#tab:cvres">1</a>. Thirty-three texts
+were correctly classified, while another 5 had rank 1, i.e. the
+correct author was the second choice. The mean of the ranked values is
+E(R<sub>k</sub>) = 1.681. Given that there are 45 texts to be assigned, the
+correct assignment of 73.3% of them represents an error rate of just
+0.687%.<a href="#tthFtNtAAC" name="tthFrefAAC"><sup>2</sup></a>
+
+<p>
+
+</p><p><a name="tth_tAb1">
+</a>   
+</p><center>    
+<table>
+<tbody><tr><td colspan="2" align="center">One Text</td><td colspan="2" align="center">All Texts</td></tr>
+<tr><td align="right">Rank</td><td align="right">Number</td><td align="right">Rank</td><td align="right">Number</td></tr>
+<tr><td align="right">0</td><td align="right">33</td><td align="right">0</td><td align="right">288</td></tr>
+<tr><td align="right">1</td><td align="right">5</td><td align="right">1</td><td align="right">26</td></tr>
+<tr><td align="right">2</td><td align="right">0</td><td align="right">2</td><td align="right">10</td></tr>
+<tr><td align="right">3</td><td align="right">1</td><td align="right">3</td><td align="right">5</td></tr>
+<tr><td align="right">4</td><td align="right">2</td><td align="right">4</td><td align="right">9</td></tr>
+<tr><td align="right"> &gt; 4</td><td align="right">5</td><td align="right"> &gt; 4</td><td align="right">49</td></tr></tbody></table>
+
+    
+ <center>Table 1: Results from cross-validation</center>
+    <a name="tab:cvres">
+</a>
+  </center>
+<p>
+</p><p>
+A full cross-validation was also carried out, where each text in turn
+is left out of the analysis, then the authorship of this text is
+predicted from the other data. The third column of the table in
+Appendix <a href="#app:1">B</a> details the average rank obtained for texts from
+each author. Of the 387 texts and 45 possible authors, 288 texts are
+correctly classified. The full results are presented in the second
+part of Table <a href="#tab:cvres">1</a>. The average rank for the texts is
+E(R<sub>k</sub>) = 2.100.
+
+</p><p>
+      </p><h3><a name="tth_sEc3.2">
+3.2</a>&nbsp;&nbsp;Outside the Cave of Shadows</h3>
+In a study of how authorial discrimination may be improved by the use
+of syntactic data, Baayen et al.&nbsp;(1996) examined
+ten samples of text from each of two known authors, Innes and
+Allingham. Of the twenty samples, the provenance of fourteen was known
+to the experimenters, the remaining six had to be assigned to one of
+the two authors. Baayen et al. use principal components analyses of
+frequently occurring words, measures of lexical richness, and rare
+constructions to identify the authors of the six text samples. While
+Baayen et al.&nbsp;apply their methods to both the syntactic and lexical
+vocabulary, we will just consider the lexical data since a transition
+matrix of syntax rules would be too large to deal with. The two sets
+of attributed text samples will form the training set, while the
+unassigned samples will form the test set.
+
+<p>
+Cross-validation gives perfect results; all of the texts known to be
+by author A (Innes) are classified as being by Innes, and the samples
+from author B (Allingham) are all classified as being by Allingham.
+The allocation of the six samples to be classified and their correct
+attributions, shown in parentheses, are A (A), B (B), A (B), A (A), B
+(B) and A (A) respectively. Five of the six samples have been
+correctly assigned to their authors, which compares favourably with
+similar results reported by Baayen et al.&nbsp;when using measures of
+lexical richness (four out of six classified correctly) and frequently
+occurring words (five out of six). Inspection of the probabilities
+realised by the transition matrices shows that the difference between
+the attributions has an average of 0.0060 and a standard deviation of
+0.0028. The third text, which was mis-classified, gives rise to a
+difference of only 0.00038. This technique therefore performs as well
+as any of the methods applied to the lexical data by Baayen et al.
+
+</p><p>
+      </p><h3><a name="tth_sEc3.3">
+3.3</a>&nbsp;&nbsp;Federalist Papers</h3>
+The <em>Federalist Papers</em> were written in 1787 and 1788 to persuade
+the citizens of New York State to adopt the nascent Constitution of
+the United States. From their initial use by Mosteller and Wallace in
+1964, through research by McColly and Weier (1983)
+to recent work by Holmes and Forsyth (1995) and Tweedie et al.&nbsp;(1996),
+they have become somewhat of a test case for new methods of authorship
+attribution.
+
+<p>
+There are 85 texts, of which 52 were written entirely by Hamilton and
+14 entirely by Madison, with 12 papers that are disputed between these
+two authors. A further three texts were written jointly by Hamilton
+and Madison. The remaining texts were written by Jay and we shall not
+consider these texts here. The texts known to be by either Hamilton or
+Madison will form the training set, while the disputed and joint
+papers will make up the test set.
+
+</p><p>
+When individual texts are held out for cross-validation purposes, we
+find that four out of the fourteen Madison papers are classified as
+being by Hamilton, while only two out of the 52 Hamilton papers are
+misclassified. This overall misclassification rate of 9% is quite
+acceptable for cross-validation.
+
+</p><p>
+All of the disputed papers are assigned by the Markov chain to
+Madison, a result consistent with that of Mosteller and Wallace and
+subsequent researchers. In addition, the joint papers, i.e. numbers 18
+to 20, are classified as being by Madison, Hamilton and Madison,
+respectively.
+
+</p><p>
+Mosteller and Wallace (1964) also assign paper 18 to Madison, although
+Tweedie et al.'s neural network assigns it to Hamilton. The latter
+note that very few of their eleven function words actually occur in
+the text. A technique such as the one presented here which deals with
+letter bigrams will not have this problem, and hopefully give rise to
+more accurate results.
+
+</p><p>
+Our technique assigns paper 19 to Hamilton, although the probabilities
+differ only by 0.0007, in comparison with the average difference of
+0.0048 for the undisputed papers. Mosteller and Wallace conclude that
+the majority of the paper was written by Madison, and Tweedie et al's
+neural network also assigns the text to Madison.
+
+</p><p>
+Finally, for paper 20, Tweedie et al.&nbsp;(1996) cite Bourne (1901) writing
+
+</p><blockquote>
+  Fully nine-tenths
+of it is drawn from Madison's own abstract of Sir William Temple's
+<em>Observations upon the United Provinces </em> and of Fetice's <em>
+Code de l'Humanit&#233;</em> ...  Sir William Temple's claim to be
+recognized as joint author of No. 20 is far stronger than
+Hamilton's.
+</blockquote>
+They conclude that Temple's influence is the reason that the paper is
+assigned to Hamilton; our method assigns the text, perhaps more
+accurately, to Madison.
+
+<p>
+        </p><h2><a name="tth_sEc4">
+4</a>&nbsp;&nbsp;Discussion and Conclusions</h2>
+In the section above we have considered three data sets which
+illustrate the versatility of our proposed technique. Many studies of
+authorship attribution are limited by the small number of texts that
+are considered, with valid questions about their generalisability. To
+address this, our first data set was made up of 387 texts from 45
+authors, 74.42% of which were correctly classified. If we treat as
+correct an author being in the top three selected, the success rate
+goes up to 83.72%, a quite remarkable result. Khmelev (2000) reports
+similar results with texts written in Russian.
+
+<p>
+To test the method on data in the literature we considered two
+previously published cases. Our technique performs at least as well as
+any used by Baayen et al.&nbsp;(1996) on the lexical data, and correctly
+assigns the disputed <em>Federalist Papers</em>. This sucess is
+particularly reassuring given the change in magnitude of the sample
+sizes, from hundreds of thousands of words in the Project Gutenberg
+archive data to around ten thousand in the Cave of Shadows data to
+around one thousand words in the <em>Federalist Papers</em>.
+
+</p><p>
+The data used for the Markov Chain can perhaps be described as
+linguistically microscopic - the unit is too small for meaningful
+conclusions to be reached regarding characteristics of the texts by
+the individual authors.  Comparison of transition matrices may allow
+the researcher to comment that Hamilton uses `p' followed by `a' more
+than Madison, for example, but this does not add to the stylistic
+interpretation of the texts.
+
+</p><p>
+Such letter sequences may also be dependent on the subject of the
+texts. Improved results may be obtained by removing context-dependent
+words and performing the analysis only on function words, or very
+frequent words. Another possibility, along the lines of Baayen et al.&nbsp;
+(1996), would be to examine the transitions between parts of speech
+used, thus tapping in to the syntactic structure of the text and
+avoiding any dependence on context. This research is ongoing and
+some results are presented in Kuskushkina et al.
+(2001).
+
+</p><p>
+</p><p>
+        </p><h2><a name="tth_sEcA">
+A</a>&nbsp;&nbsp;Mathematical Background</h2>
+<a name="app:math">
+</a>Given W writers each of which has N<sub>w</sub> texts, where w = 0, <font face="symbol">ј</font>,W<font face="symbol">-</font>1, we have Q<sub>ij</sub><sup>wn</sup> which is the number of transitions from
+letter i to j, for text n (n = 0, <font face="symbol">ј</font>N<sub>w</sub><font face="symbol">-</font>1) from writer w
+(w = 0, <font face="symbol">ј</font>W<font face="symbol">-</font>1). To find the predicted author for text [^n]
+of author [^w] we have 
+<br clear="all"><table width="100%" border="0"><tbody><tr><td>
+<table align="center"><tbody><tr><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>k</sup> = </td><td nowrap="nowrap" align="center">
+<font size="-1">N<sub>w</sub><font face="symbol">-</font>1</font><!--sup
+--><br><font size="+3" face="symbol">е<br></font>
+<font size="-1">n = 0</font>&nbsp;<br></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>kn</sup></td></tr></tbody></table>
+</td></tr></tbody></table>
+
+ for k <font face="symbol">№</font> [^w], and 
+<br clear="all"><table width="100%" border="0"><tbody><tr><td>
+<table align="center"><tbody><tr><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>[^w]</sup> = </td><td nowrap="nowrap" align="center">
+<font size="-1"></font><!--sup
+--><br><font size="+3" face="symbol">е<br></font>
+<font size="-1">n <font face="symbol">№</font> [^n]</font>&nbsp;<br></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>[^w]n</sup>.</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+
+<p>
+We then have 
+<br clear="all"><table width="100%" border="0"><tbody><tr><td>
+<table align="center"><tbody><tr><td nowrap="nowrap" align="center">
+<font face="symbol">L</font><sub>k</sub> (</td><td nowrap="nowrap" align="center">
+^<br>w<br>&nbsp;<br></td><td nowrap="nowrap" align="center">
+,</td><td nowrap="nowrap" align="center">
+^<br>n<br>&nbsp;<br></td><td nowrap="nowrap" align="center">
+) = <font face="symbol">-</font> </td><td nowrap="nowrap" align="center">
+<font size="-1"></font><!--sup
+--><br><font size="+3" face="symbol">е<br></font>
+<font size="-1">i,j</font>&nbsp;<br></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>[^w] [^n]</sup> ln</td><td class="cl" align="left"><font face="symbol">
+ж<br>з<br>
+и
+</font></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>k</sup><hr noshade="noshade">Q<sub>i</sub><sup>k</sup><br></td><td class="cl" align="left"><font face="symbol">
+ц<br>ч<br>
+ш
+</font></td><td nowrap="nowrap" align="center">
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+ and 
+
+</p><p>
+
+<br clear="all"><table width="100%" border="0"><tbody><tr><td>
+<table align="center"><tbody><tr><td nowrap="nowrap" align="center">
+<font face="symbol">L</font><sub>[^w]</sub> (</td><td nowrap="nowrap" align="center">
+^<br>w<br>&nbsp;<br></td><td nowrap="nowrap" align="center">
+,</td><td nowrap="nowrap" align="center">
+^<br>n<br>&nbsp;<br></td><td nowrap="nowrap" align="center">
+) = <font face="symbol">-</font> </td><td nowrap="nowrap" align="center">
+<font size="-1"></font><!--sup
+--><br><font size="+3" face="symbol">е<br></font>
+<font size="-1">i,j</font>&nbsp;<br></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>[^w] [^n]</sup> ln</td><td class="cl" align="left"><font face="symbol">
+ж<br>з<br>
+и
+</font></td><td nowrap="nowrap" align="center">
+Q<sub>ij</sub><sup>[^w]</sup><hr noshade="noshade">Q<sub>i</sub><sup>[^w]</sup><br></td><td class="cl" align="left"><font face="symbol">
+ц<br>ч<br>
+ш
+</font></td><td nowrap="nowrap" align="center">
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+
+If Q<sub>ij</sub><sup>k</sup> = 0 then we do not evaluate that part of the sum.
+
+</p><p>
+We also define ranks R<sub>k</sub>([^w],[^n]) to be the rank of
+<font face="symbol">L</font><sub>k</sub>([^w],[^n]) in {<font face="symbol">L</font><sub>k</sub>([^w],[^n]), k = 0,<font face="symbol">ј</font>, W<font face="symbol">-</font>1} where R<sub>k</sub>([^w],[^n]) <font face="symbol">О</font> {0, <font face="symbol">ј</font>,W<font face="symbol">-</font>1}. If
+the text is assigned to the correct author, then R<sub>[^w]</sub>([^w],[^n]) = 0.
+
+</p><p>
+        </p><h2><a name="tth_sEcB">
+B</a>&nbsp;&nbsp;Results from Project Gutenberg texts</h2>
+<a name="app:1">
+</a>
+
+<p><a name="tth_tAb2">
+</a> 
+  
+</p><center>
+<p>
+
+<table>
+<tbody><tr><td></td><td colspan="1" align="center">rank of</td><td colspan="1" align="center">average</td><td colspan="1" align="center">number of</td></tr>
+<tr><td>Author </td><td colspan="1" align="center">held-out text</td><td colspan="1" align="center">rank in c-v</td><td colspan="1" align="center">texts</td></tr>
+<tr><td>Austen, Jane, 1775-1817                      </td><td align="center">0</td><td align="center">0</td><td align="center">8</td></tr>
+<tr><td>Bronte, Anne, 1820-1849                      </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Bronte, Charlotte, 1816-1855                 </td><td align="center">1</td><td align="center">5.25</td><td align="center">4</td></tr>
+<tr><td>Burroughs, Edgar Rice, 1875-1950             </td><td align="center">0</td><td align="center">0</td><td align="center">25</td></tr>
+<tr><td>Carroll, Lewis, 1832-1898                    </td><td align="center">0</td><td align="center">7.67</td><td align="center">6</td></tr>
+<tr><td>Cather, Willa Sibert, 1873-1947              </td><td align="center">0</td><td align="center">0</td><td align="center">5</td></tr>
+<tr><td>Christie, Agatha, 1891-1976                  </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Conrad, Joseph, 1857-1924                    </td><td align="center">0</td><td align="center">0.32</td><td align="center">22</td></tr>
+<tr><td>Cooper, James Fenimore, 1789-1851            </td><td align="center">0</td><td align="center">0.83</td><td align="center">6</td></tr>
+<tr><td>Crane, Stephen, 1871-1900                    </td><td align="center">0</td><td align="center">2</td><td align="center">2</td></tr>
+<tr><td>Defoe, Daniel, 1661?-1731                    </td><td align="center">3</td><td align="center">7.12</td><td align="center">8</td></tr>
+<tr><td>Dickens, Charles, 1812-1870                  </td><td align="center">4</td><td align="center">2.07</td><td align="center">57</td></tr>
+<tr><td>Doyle, Arthur Conan, Sir, 1859-1930          </td><td align="center">7</td><td align="center">2.45</td><td align="center">20</td></tr>
+<tr><td>Eliot, T. S., 1888-1965                      </td><td align="center">0</td><td align="center">0</td><td align="center">3</td></tr>
+<tr><td>Fielding, Henry, 1707-1754                   </td><td align="center">1</td><td align="center">1</td><td align="center">2</td></tr>
+<tr><td>Fitzgerald, F. Scott, 1896-1940              </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Hardy, Thomas, 1840-1928                     </td><td align="center">0</td><td align="center">0</td><td align="center">7</td></tr>
+<tr><td>Hawthorne, Nathaniel, 1804-1864              </td><td align="center">0</td><td align="center">0.5</td><td align="center">12</td></tr>
+<tr><td>Henry, O., 1862-1910                         </td><td align="center">0</td><td align="center">0</td><td align="center">8</td></tr>
+<tr><td>Irving, Washington, 1783-1859                </td><td align="center">0</td><td align="center">5.43</td><td align="center">7</td></tr>
+<tr><td>James, Henry, 1843-1916                      </td><td align="center">0</td><td align="center">1.36</td><td align="center">22</td></tr>
+<tr><td>Kilmer, Joyce, 1886-1918                     </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Kipling, Rudyard, 1865-1936                  </td><td align="center">0</td><td align="center">2.14</td><td align="center">14</td></tr>
+<tr><td>Lamb, Charles, 1775-1834                     </td><td align="center">0</td><td align="center">0</td><td align="center">3</td></tr>
+<tr><td>Lewis, Sinclair, 1885-1951                   </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>London, Jack, 1876-1916                      </td><td align="center">1</td><td align="center">1</td><td align="center">28</td></tr>
+<tr><td>Longfellow, Henry Wadsworth, 1807-1882       </td><td align="center">0</td><td align="center">0</td><td align="center">3</td></tr>
+<tr><td>Marlowe, Christopher, 1564-1593              </td><td align="center">0</td><td align="center">0</td><td align="center">7</td></tr>
+<tr><td>Maugham, W. Somerset, 1874-1965              </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Melville, Herman, 1819-1891                  </td><td align="center">0</td><td align="center">2</td><td align="center">2</td></tr>
+<tr><td>Millay, Edna St. Vincent, 1892-1950          </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Milton, John, 1608-1674                      </td><td align="center">0</td><td align="center">6.59</td><td align="center">6</td></tr>
+<tr><td>Poe, Edgar Allan, 1809-1849                  </td><td align="center">0</td><td align="center">0.75</td><td align="center">8</td></tr>
+<tr><td>Potter, Beatrix, 1866-1943                   </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Shaw, George Bernard, 1856-1950              </td><td align="center">10</td><td align="center">4.57</td><td align="center">7</td></tr>
+<tr><td>Shelley, Mary Wollstonecraft, 1797-1851      </td><td align="center">0</td><td align="center">0</td><td align="center">2</td></tr>
+<tr><td>Sinclair, Upton, 1878-1968                   </td><td align="center">25</td><td align="center">29.67</td><td align="center">3</td></tr>
+<tr><td>Stoker, Bram, 1847-1912                      </td><td align="center">11</td><td align="center">7</td><td align="center">2</td></tr>
+<tr><td>Swift, Jonathan, 1667-1745                   </td><td align="center">0</td><td align="center">0.5</td><td align="center">4</td></tr>
+<tr><td>Tennyson, Alfred, Baron, 1809-1892           </td><td align="center">0</td><td align="center">0</td><td align="center">3</td></tr>
+<tr><td>Thoreau, Henry David, 1817-1862              </td><td align="center">0</td><td align="center">0</td><td align="center">3</td></tr>
+<tr><td>Trollope, Anthony, 1815-1882                 </td><td align="center">4</td><td align="center">6</td><td align="center">5</td></tr>
+<tr><td>Wells, H. G., 1866-1946                      </td><td align="center">1</td><td align="center">0.67</td><td align="center">18</td></tr>
+<tr><td>Wharton, Edith, 1862-1937                    </td><td align="center">0</td><td align="center">0.11</td><td align="center">9</td></tr>
+<tr><td>Wilde, Oscar, 1854-1900                      </td><td align="center">1</td><td align="center">7.25</td><td align="center">20</td></tr></tbody></table>
+
+    
+ </p><center>Table 2: Authors sampled from Project Gutenberg, with the 
+number of texts examined, the rank of a single held-out text and the sum
+ of the ranks when cross-validation is carried out.</center>
+    <a name="tab:pgtexts">
+</a>
+  </center>
+<p>
+</p><p>
+</p><p>
+</p><h2>References</h2>
+<dl compact="compact">
+<dt>[<a href="#CITEBaayen2" name="Baayen2"> Baayen et&nbsp;al. 1996</a>]</dt><dd>
+Baayen, R.&nbsp;H., van Halteren, H., and Tweedie, F.&nbsp;J. (1996).
+ Outside the cave of shadows. Using syntactic annotation to enhance
+  authorship attribution.
+ <em>Literary and Linguistic Computing</em>, 11(3):121-131.
+
+<p>
+</p></dd><dt>[<a href="#CITEBourne" name="Bourne"> Bourne 1901</a>]</dt><dd>
+Bourne, E.&nbsp;G. (1901).
+ The authorship of <i>The Federalist</i>.
+ In <em>Essays in historical criticism</em>, pages 113-145. Charles
+  Scribner's Sons, New York.
+
+<p>
+</p></dd><dt>[<a href="#CITEFomenko:96" name="Fomenko:96"> Fomenko and Fomenko 1996</a>]</dt><dd>
+Fomenko, V.&nbsp;P. and Fomenko, T.&nbsp;G. (1996).
+ Avtorskij invariant russkikh literaturnykh tekstov. [Predislovie
+  A. T. Fomenko] (Authors' quantitative invariant for Russian literary
+  texts [Commentary by Academician A. T. Fomenko]).
+ In Fomenko, A.&nbsp;T., editor, <em>Novaja khronologija Gretsii:
+  Antichnost' v srednevekov'e</em>, pages 768-820. Izd-vo MGU.
+
+<p>
+</p></dd><dt>[<a href="#CITEForsyth:DIH:96" name="Forsyth:DIH:96"> Forsyth and Holmes 1996</a>]</dt><dd>
+Forsyth, R.&nbsp;S. and Holmes, D.&nbsp;I. (1996).
+ Feature-finding for text classification.
+ <em>Literary and Linguistic Computing</em>, 11(4):163-174.
+
+<p>
+</p></dd><dt>[<a href="#CITEHolmes:98" name="Holmes:98"> Holmes 1998</a>]</dt><dd>
+Holmes, D.&nbsp;I. (1998).
+ The evolution of stylometry in humanities scholarship.
+ <em>Literary and Linguistic Computing</em>, 13(3):111-117.
+
+<p>
+</p></dd><dt>[<a href="#CITEHolmes9" name="Holmes9"> Holmes and Forsyth 1995</a>]</dt><dd>
+Holmes, D.&nbsp;I. and Forsyth, R.&nbsp;S. (1995).
+ The <i>Federalist</i> revisited: New directions in authorship
+  attribution.
+ <em>Literary and Linguistic Computing</em>, 10(2):111-127.
+
+<p>
+</p></dd><dt>[<a href="#CITEKhmelev:00" name="Khmelev:00"> Khmelev 2000</a>]</dt><dd>
+Khmelev, D.&nbsp;V. (2000).
+ Disputed authorship resolution through using relative entropy for
+  Markov chains of letters in human language texts.
+ <em>Journal of Quantitative Linguistics</em>, 7.
+
+<p>
+</p></dd><dt>[<a href="#CITEKjell" name="Kjell"> Kjell 1994</a>]</dt><dd>
+Kjell, B. (1994).
+ Authorship determination using letter pair frequency features with
+  neural network classifiers.
+ <em>Literary and Linguistic Computing</em>, 9(2):119-124.
+
+<p>
+</p></dd><dt>[<a href="#CITEKukushkina:00" name="Kukushkina:00"> Kukushkina et&nbsp;al.</a>]</dt><dd>
+Kukushkina, O.&nbsp;V., Polikarpov, A.&nbsp;A., and Khmelev, D.&nbsp;V. (2001).
+ Opredelenie avtorstva teksta ispol'zovaniem bukvennoi i
+  grammaticheskoi informacii.
+ <em>Probl. peredachi inform.</em>, 37(2): to appear. Translated 
+under the title  Using Letters and Grammatical Statistics for 
+Authorship Attribution.
+ <em>Problems of Information Transmission</em> 37(2), <em>to appear</em>.
+
+<p>
+</p></dd><dt>[<a href="#CITEMarkov:13" name="Markov:13"> Markov 1913</a>]</dt><dd>
+Markov, A.&nbsp;A. (1913).
+ Primer statisticheskogo issledovanija nad tekstom `Evgenija
+  Onegina' illjustrirujuschij svjaz' ispytanij v tsep (An example of
+  statistical study on the text of `Eugene Onegin' illustrating the linking
+  of events to a chain).
+ <em>Izvestija Imp. Akademii nauk, serija VI</em>, 3:153-162.
+
+<p>
+</p></dd><dt>[<a href="#CITEMarkov:16" name="Markov:16"> Markov 1916</a>]</dt><dd>
+Markov, A.&nbsp;A. (1916).
+ Ob odnom primenenii statisticheskogo metoda (On some application of
+  statistical method).
+ <em>Izvestija Imp. Akademii nauk, serija VI</em>, 4:239-242.
+
+<p>
+</p></dd><dt>[<a href="#CITEMcColly" name="McColly"> McColly and Weier 1983</a>]</dt><dd>
+McColly, W.&nbsp;B. and Weier, D. (1983).
+ Literary attribution and likelihood ratio tests - the case of the
+  Middle English <i>Pearl</i>-poems.
+ <em>Computers and the Humanities</em>, 17:65-75.
+
+<p>
+</p></dd><dt>[<a href="#CITEMilov:94" name="Milov:94"> Milov 1994</a>]</dt><dd>
+Milov, L.&nbsp;V., editor (1994).
+ <em>Ot Nestora do Fonvizina. Novye metody opredelenija
+  avtorstva. (From Nestor to Fonvizin. New methods of determining
+  authorship</em>.
+ Progress Publishing.
+
+<p>
+</p></dd><dt>[<a href="#CITEMorozov:15" name="Morozov:15"> Morozov 1915</a>]</dt><dd>
+Morozov, N.&nbsp;A. (1915).
+ Lingvisticheskie spektry (Linguistic spectra).
+ <em>Izvestija Akademii Nauk (Section of Russian Language)</em>,
+  XX(1-4).
+
+<p>
+</p></dd><dt>[<a href="#CITEFederalist" name="Federalist"> Mosteller and Wallace 1964</a>]</dt><dd>
+Mosteller, F. and Wallace, D.&nbsp;L. (1964).
+ <em>Applied Bayesian and Classical Inference: The Case of the
+  Federalist Papers</em>.
+ Addison-Wesley, Reading.
+
+<p>
+</p></dd><dt>[<a href="#CITETweedie2" name="Tweedie2"> Tweedie et&nbsp;al. 1996</a>]</dt><dd>
+Tweedie, F.&nbsp;J., Singh, S., and Holmes, D.&nbsp;I. (1996).
+ Neural network applications in stylometry: The <i>Federalist
+  Papers</i>.
+ <em>Computers and the Humanities</em>, 30:1-10.
+
+<p>
+</p></dd></dl>  
+<h1>Contents </h1><a href="#tth_sEc1">1&nbsp; Introduction</a><br>
+<a href="#tth_sEc2">2&nbsp; Method</a><br>
+<a href="#tth_sEc3">3&nbsp; Application</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.1">3.1&nbsp; Project Gutenberg</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.2">3.2&nbsp; Outside the Cave of Shadows</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#tth_sEc3.3">3.3&nbsp; Federalist Papers</a><br>
+<a href="#tth_sEc4">4&nbsp; Discussion and Conclusions</a><br>
+<a href="#tth_sEcA">A&nbsp; Mathematical Background</a><br>
+<a href="#tth_sEcB">B&nbsp; Results from Project Gutenberg texts</a><br>
+ 
+<p>
+</p><hr><h3>Footnotes:</h3>
+
+<p><a name="tthFtNtAAB"></a><a href="#tthFrefAAB"><sup>1</sup></a>Project Gutenberg web site:
+    <a href="http://promo.net/pg/"><tt>http://promo.net/pg/</tt></a>
+</p><p><a name="tthFtNtAAC"></a><a href="#tthFrefAAC"><sup>2</sup></a>If we assume that each pairwise comparison of a
+  text and author is independent and error rate in each comparision is 
+  p, then the probability of a correct
+  classification is (1<font face="symbol">-</font>p)<sup>45</sup>. For error rate p = 0.05 we have
+  (1<font face="symbol">-</font>0.05)<sup>45</sup> <font face="symbol">»</font> 0.099, and solving for p gives
+  (1<font face="symbol">-</font>0.006868)<sup>45</sup> = 0.7333.
+</p><p></p><hr><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 2.70.<br>On 22 May 2002, 21:22.</small>
+</blockquote>
+<script src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/ple_b.js" type="text/javascript"></script><p align="center"><img src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/line.gif" width="680" height="4" border="0"></p><p class="menu" align="center">| <a href="http://www.philol.msu.ru/~lex/main_en.htm">main</a> | | <a href="http://www.philol.msu.ru/~lex/news_e.htm">news</a> | | <a href="http://www.philol.msu.ru/~lex/main_en.htm#1">employees</a> | | <a href="http://www.philol.msu.ru/~lex/main_en.htm#2">about Laboratory</a> | | <a href="http://www.philol.msu.ru/~lex/korpus.htm">the Newspaper Corpus</a> | | <a href="http://www.philol.msu.ru/~lex/articles/fdsl.htm">the Chronological Dictionary</a> |</p><p class="menu" align="center">| <a href="http://www.philol.msu.ru/~lex/library_e.htm">library</a> | | <a href="http://www.philol.msu.ru/~lex/biblio.htm">bibliography</a> | | <a href="http://www.philol.msu.ru/~lex/kurses.htm">courses for students</a>&nbsp; | | <a href="http://www.philol.msu.ru/~humlang">Human Language site</a> | | <a href="http://www.philol.msu.ru/~lex/main_en.htm#10">personalia</a> |</p><p class="menu" align="center">| <a href="http://www.philol.msu.ru/~lex/links_e.htm">useful links</a> | | <a href="http://www.philol.msu.ru/~lex/main_en.htm#11">miscellaneous</a> | | <a href="http://www.philol.msu.ru/~lex/sitemap_e.htm">site map</a> | | <a href="http://www.philol.msu.ru/~lex/search/search_e.htm">search</a> |</p><p class="menu" align="center">| <a href="http://www.philol.msu.ru/~lex/main.htm">russian version</a> |</p>
+<script src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/infoe.js" type="text/javascript"></script><div align="center"><table width="100%" border="0"><tbody><tr><td width="50%"><p class="menu" align="left">Created and supported by <a href="mailto:polikarp@philol.msu.ru">Anatoliy A. Polikarpov</a><br><a href="mailto:a_varl@philol.msu.ru?subject=from lexigraph">Webmaster</a></p></td><td width="50%"><p class="menu" align="right">Last updated:  12/05/2018 22:11:56</p></td></tr></tbody></table></div>
+
+
+<script language="javascript">
+hotlog_js="1.0";
+hotlog_r=""+Math.random()+"&s=62166&im=134&r="+escape(document.referrer)+"&pg="+
+escape(window.location.href);
+document.cookie="hotlog=1; path=/"; hotlog_r+="&c="+(document.cookie?"Y":"N");
+</script><script language="javascript1.1">
+hotlog_js="1.1";hotlog_r+="&j="+(navigator.javaEnabled()?"Y":"N")</script>
+<script language="javascript1.2">
+hotlog_js="1.2";
+hotlog_r+="&wh="+screen.width+'x'+screen.height+"&px="+
+(((navigator.appName.substring(0,3)=="Mic"))?
+screen.colorDepth:screen.pixelDepth)</script>
+<script language="javascript1.3">hotlog_js="1.3"</script>
+<script language="javascript">hotlog_r+="&js="+hotlog_js;
+document.write("<a href='http://click.hotlog.ru/?62166' target='_top'><img "+
+" src='http://hit4.hotlog.ru/cgi-bin/hotlog/count?"+
+hotlog_r+"&' border=0 width=88 height=31 alt=HotLog></a>")</script><a href="http://click.hotlog.ru/?62166" target="_top"><img src="Using%20Markov%20Chains%20for%20Identification%20of%20Writers_files/count" alt="HotLog" width="88" height="31" border="0"></a>
+<noscript><a href=http://click.hotlog.ru/?62166 target=_top><img
+src="http://hit4.hotlog.ru/cgi-bin/hotlog/count?s=62166&im=134" border=0 
+width="88" height="31" alt="HotLog"></a></noscript>
+<!-- /HotLog -->
+
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter23466301 = new Ya.Metrika({id:23466301,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+        } catch(e) { }
+    });
+
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f, false);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/23466301" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter --></body><!-- HotLog --></html>
+<!-- Yandex.Metrika counter -->

@@ -14,23 +14,33 @@ def log0(x):
     return 0 if x <= 0 else log(x)
 
 
-#def compute_text_likelihood(filename, T, dict_rev, histogram, index):
+
 def getTMatrix(filename):
     with open(filename, 'r', encoding = 'utf-8') as file:
         text = word_tokenize(file.read().replace('\n', ' '))
         str = getRidOfPunctuationAndUpperWords(text)
-        #print(str)
 
         return computeTMatrix(str)
 
-def classifyText(filename, matrix):
+def calculateProbability(string, TMatrix):
+    bigrams = ngrams(string, 2)
+    s = 0
+    for bigram in bigrams:
+        first = bigram[0]
+        second = bigram[1]
+        p = TMatrix[LetterIndices.index(first), LetterIndices.index(second)]
+        s += log0(p)
+    return s
+def classifyText(filename, TMatrices):
     with open(filename, 'r', encoding = 'utf-8') as file:
         text = word_tokenize(file.read().replace('\n', ' '))
-        str = getRidOfPunctuationAndUpperWords(text)
-        #print(str)
-        
-
-
+        string = getRidOfPunctuationAndUpperWords(text)
+        #bigrams = ngrams(string, 2)
+        probabilities = []
+        for TMatrix in TMatrices:
+            s = calculateProbability(string, TMatrix)
+            probabilities.append(s)
+        return probabilities
 
 def computeTMatrix(string):
     T = np.zeros([SYMBOLS,SYMBOLS])
@@ -43,8 +53,11 @@ def computeTMatrix(string):
 
     sums = np.sum(T, axis=1)
 
-    return T/sums[:, None]
-
+    #print (sums)
+    for i in range(SYMBOLS):
+        if sums[i] != 0:
+            T[i,:]/=sums[i]
+    return T
 def getRidOfPunctuationAndUpperWords(text):
     #text.remove(',')
     toDeleteList = (',', '!', '?', '.', ';', ':', '\'', '"', '`')
@@ -52,7 +65,7 @@ def getRidOfPunctuationAndUpperWords(text):
 
     s = ' '.join(text)
     #удаляем пунктуацию
-    table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”')
+    table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”…*–()­')
     s = s.translate(table)
     
     return " ".join([w.lower() for w in s.split()])
@@ -60,13 +73,22 @@ def getRidOfPunctuationAndUpperWords(text):
     
 
 Vonnegut = getTMatrix("Vonnegut1.txt")
-print(Vonnegut)
-#Martin = getTMatrix("Martin1.txt")
-#Lovecraft = getTMatrix("Lovecraft1.txt")
+Martin = getTMatrix("Martin1.txt")
+Lovecraft = getTMatrix("Lovecraft1.txt")
+Rowling = getTMatrix("Rowling1.txt")
+#print(Lovecraft)
+TMatrices = [Vonnegut, Martin, Lovecraft, Rowling]
 
+print("Английский язык: 1. Воннегут 2. Мартин 3. Лавкрафт 4. Роулинг")
 
-
-#Pv = classifyText("Lovecraft2.txt", Vonnegut)
+PList = classifyText("Lovecraft2.txt", TMatrices)
+print("Лавкрафт", PList)
+PList = classifyText("Vonnegut2.txt", TMatrices)
+print("Воннегут", PList)
+PList = classifyText("Martin2.txt", TMatrices)
+print("Мартин", PList)
+PList = classifyText("Rowling2.txt", TMatrices)
+print("Роулинг", PList)
 
 
 
