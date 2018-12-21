@@ -4,7 +4,7 @@ import nltk
 from nltk import word_tokenize
 from nltk import ngrams
 import string
-import re
+
 
 SYMBOLS = 27
 
@@ -35,7 +35,6 @@ def classifyText(filename, TMatrices):
     with open(filename, 'r', encoding = 'utf-8') as file:
         text = word_tokenize(file.read().replace('\n', ' '))
         string = getRidOfPunctuationAndUpperWords(text)
-        #bigrams = ngrams(string, 2)
         probabilities = []
         for TMatrix in TMatrices:
             s = calculateProbability(string, TMatrix)
@@ -46,41 +45,33 @@ def computeTMatrix(string):
     T = np.zeros([SYMBOLS,SYMBOLS])
     bigrams = ngrams(string, 2)
     for bigram in bigrams:
-
         first = bigram[0]
         second = bigram[1]
         T[LetterIndices.index(first), LetterIndices.index(second)] += 1
 
     sums = np.sum(T, axis=1)
 
-    #print (sums)
     for i in range(SYMBOLS):
         if sums[i] != 0:
             T[i,:]/=sums[i]
     return T
-def getRidOfPunctuationAndUpperWords(text):
-    #text.remove(',')
-    toDeleteList = (',', '!', '?', '.', ';', ':', '\'', '"', '`')
-    
 
+def getRidOfPunctuationAndUpperWords(text): 
     s = ' '.join(text)
     #удаляем пунктуацию
     table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”…*–()­')
     s = s.translate(table)
     
     return " ".join([w.lower() for w in s.split()])
-    
-    
+        
 
 Vonnegut = getTMatrix("Vonnegut1.txt")
 Martin = getTMatrix("Martin1.txt")
 Lovecraft = getTMatrix("Lovecraft1.txt")
 Rowling = getTMatrix("Rowling1.txt")
-#print(Lovecraft)
 TMatrices = [Vonnegut, Martin, Lovecraft, Rowling]
 
 print("Английский язык: 1. Воннегут 2. Мартин 3. Лавкрафт 4. Роулинг")
-
 PList = classifyText("Lovecraft2.txt", TMatrices)
 print("Лавкрафт", PList)
 PList = classifyText("Vonnegut2.txt", TMatrices)
