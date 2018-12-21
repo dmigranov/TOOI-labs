@@ -5,12 +5,15 @@ from nltk import word_tokenize
 from nltk import ngrams
 import string
 
-SYMBOLS = 27
 
-#LetterIndices = [" ","а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ь","ы","ъ","э","ю","я"]
-LetterIndices = [" ","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+SYMBOLS = 34
+
+LetterIndices = [" ","а","б","в","г","д","е","ё","ж","з","и","й","к","л","м","н","о","п","р","с","т","у","ф","х","ц","ч","ш","щ","ь","ы","ъ","э","ю","я"]
+#LetterIndices = [" ","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 def log0(x):
     return 0 if x <= 0 else log(x)
+
+
 
 def getTMatrix(filename):
     with open(filename, 'r', encoding = 'utf-8') as file:
@@ -56,27 +59,27 @@ def computeTMatrix(string):
 def getRidOfPunctuationAndUpperWords(text): 
     s = ' '.join(text)
     #удаляем пунктуацию
-    table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”…*–()­')
+    table = str.maketrans('', '', ',!?.;:\'"`-“‘’0123456789—”…*–()­«»')
     s = s.translate(table)
     
     return " ".join([w.lower() for w in s.split()])
         
 
-Vonnegut = getTMatrix("Vonnegut1.txt")
-Martin = getTMatrix("Martin1.txt")
-Lovecraft = getTMatrix("Lovecraft1.txt")
-Rowling = getTMatrix("Rowling1.txt")
-TMatrices = [Vonnegut, Martin, Lovecraft, Rowling]
+Strugacki = getTMatrix("Strugacki1.txt")
+Bulgakov = getTMatrix("Bulgakov1.txt")
+Dostoevsky = getTMatrix("Dostoevsky1.txt")
 
-print("Английский язык: 1. Воннегут 2. Мартин 3. Лавкрафт 4. Роулинг")
-PList = classifyText("Lovecraft2.txt", TMatrices)
-print("Лавкрафт", PList)
-PList = classifyText("Vonnegut2.txt", TMatrices)
-print("Воннегут", PList)
-PList = classifyText("Martin2.txt", TMatrices)
-print("Мартин", PList)
-PList = classifyText("Rowling2.txt", TMatrices)
-print("Роулинг", PList)
+TMatrices = [Strugacki, Bulgakov, Dostoevsky]
+
+print("Русский язык: 1. Братья Стругацкие 2. Булгаков 3. Достоевский 4. Роулинг")
+PList = classifyText("Strugacki2.txt", TMatrices)
+print("Стругацкие", PList)
+PList = classifyText("Bulgakov2.txt", TMatrices)
+print("Булгаков", PList)
+PList = classifyText("Dostoevsky2.txt", TMatrices)
+print("Достоевский", PList)
+#PList = classifyText("Rowling2.txt", TMatrices)
+#print("Роулинг", PList)
 
 
 
